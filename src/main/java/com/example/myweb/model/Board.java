@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,9 +31,12 @@ public class Board {
     @ColumnDefault("0")
     private long count;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="memberID")
     private Member user;
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private List<Reply> reply;
 
     @CreationTimestamp
     private Timestamp createDate;
