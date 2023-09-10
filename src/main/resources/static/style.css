@@ -20,22 +20,74 @@ a {
 
 }
 
+/* Commons */
+.clearfix::after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
 
 /* Components CSS */
 body{
     background-color: #0e0e0e;
     /* background-image: url(images/bg.png); */
-    color: white;
+    color: #999;
+}
+
+.logo {
+    text-indent: -99999px;
+    background-image: url(5duck.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    float: left;
+    width: 80px;
+    height: 80px;
+}
+
+.menu {
+    float: left;
+}
+
+.menu.login {
+    float: right;
+}
+
+.menu li {
+    float: left;
+}
+
+.menu li a {
+    display: block;
+    height: 80px;
+    line-height: 80px;
+    padding: 0 20px;
+    position: relative;
+}
+
+.menu li a::before {
+    content: " ";
+    background-color: currentColor;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin: 0 90px;
+    transition: margin 0.4s;
+}
+
+.menu li a:hover {
+    color: #ddd;
+}
+
+.menu li a:hover::before {
+    margin: 0;
 }
 
 .header {
-    background-color: rgba(255,255,255,0.2);
+
 }
 
-.content {
-    background-color: rgba(255,255,255,0.4);
-}
-
-.footer {
-    background-color: rgba(255,255,255,0.8);
-}
