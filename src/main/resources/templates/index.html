@@ -4,24 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Title</title>
+    <title>My-web</title>
 </head>
 <body>
-    <div class="header">
-        <div class="wrapper clearfix">
-            <a class="logo" href="/web">
-                오5리
-            </a>
-            <ul class="menu">
-                <li><a href="">글쓰기</a></li>
-                <li><a href="">임시</a></li>
-            </ul>
-            <ul class="menu login">
-                <li><a href="">JOIN</a></li>
-                <li><a href="">LOGIN</a></li>
-            </ul>
-        </div>
-    </div>
+    <!-- th:insert="~{ [ 템플릿 조각 경로 ] :: 조각명 }"  분할 -->
+    <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
+    <div th:insert="~{header :: header}"></div>
     <div class="content">
         <div class="wrapper">Contents</div>
     </div>
