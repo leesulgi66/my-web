@@ -87,6 +87,36 @@ body{
     margin: 0;
 }
 
+.content {
+    margin: 1em auto;
+    width: 40em;
+}
+
+.content .wrapper {
+    background-color: antiquewhite;
+    width: inherit;
+    margin-top: 1em ;
+    border-radius: .6em; 
+}
+
+.content h1 , p{
+    color: rgb(90, 82, 82);
+    padding: .5em;
+}
+
+.content p {
+    padding-left: 1.2em;
+}
+.content-button {
+    float: left;
+    background-color: gray;
+    display: blcok;
+    margin: 1em;
+    padding: 0.4em;
+    border-radius: .5em;
+    color: white;
+}
+
 .footer {
     border-top: 1px solid #333;
     margin-top: 1em;
