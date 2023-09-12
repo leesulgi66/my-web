@@ -49,7 +49,7 @@ body{
 
 .logo:hover {
     background-image: url(5duck_hover.png);
-    transform: scale3d(1.05, 1.05, 1);
+    transform: scale3d(1.05, 1.05, .8);
 }
 
 .menu {
@@ -122,6 +122,11 @@ body{
     padding: 0.4em;
     border-radius: .5em;
     color: white;
+}
+
+.form-group {
+    padding: 1em;
+    color: #444;
 }
 
 .footer {
