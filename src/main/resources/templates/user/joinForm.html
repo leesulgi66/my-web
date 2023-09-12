@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <title>My-web</title>
 </head>
 <body>
@@ -30,11 +31,12 @@
                         <label for="username">email</label> <input type="email" class="form-control" placeholder="아이디를 입력하세요" id="email">
                     </div>
 
-                    <a class="content-button submit-btn" href=""> 회원 가입 </a>
                 </from>
+                <button id="btn-save" class="content-button submit-btn"> 회원 가입 </button>
             </div>
         </div>
     </div>
+    <script src="/web/js/user.js"></script>
     <div th:insert="~{/layout/footer :: footer}"></div>
 </body>
 </html>
