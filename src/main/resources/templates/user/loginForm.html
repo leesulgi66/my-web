@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <title>My-web</title>
+</head>
+<body>
+    <!-- th:insert="~{ [ 템플릿 조각 경로 ] :: 조각명 }"  분할 -->
+    <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
+    <div th:insert="~{/layout/header :: header}"></div>
+    <div class="content">
+        <div class="wrapper clearfix">
+            <div>
+                <from action="/action_page.php">
+                    <div class="form-group">
+                        <label for="username">username</label> <input type="text" class="form-control" placeholder="아이디를 입력하세요" id="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">password</label> <input type="password" class="form-control" placeholder="아이디를 입력하세요" id="password">
+                    </div>
+
+                    <a class="content-button submit-btn" href=""> 회원 가입 </a>
+                </from>
+            </div>
+        </div>
+    </div>
+    <div th:insert="~{/layout/footer :: footer}"></div>
+</body>
+</html>
