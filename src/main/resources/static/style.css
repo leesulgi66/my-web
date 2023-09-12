@@ -40,15 +40,16 @@ body{
     background-image: url(5duck.png);
     background-repeat: no-repeat;
     background-position: center;
-    scale: 95%;
+    scale: 100%;
     float: left;
     width: 80px;
     height: 80px;
+    transition-duration: .5s;
 }
 
 .logo:hover {
     background-image: url(5duck_hover.png);
-    scale: 100%;
+    transform: scale3d(1.05, 1.05, 1);
 }
 
 .menu {
