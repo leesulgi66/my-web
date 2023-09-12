@@ -9,7 +9,7 @@
 <body>
     <!-- th:insert="~{ [ 템플릿 조각 경로 ] :: 조각명 }"  분할 -->
     <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
-    <div th:insert="~{header :: header}"></div>
+    <div th:insert="~{/layout/header :: header}"></div>
     <div class="content">
         <div class="wrapper clearfix">
             <div>
@@ -36,6 +36,6 @@
         </div>
         
     </div>
-    <div th:insert="~{footer :: footer}"></div>
+    <div th:insert="~{/layout/footer :: footer}"></div>
 </body>
 </html>
