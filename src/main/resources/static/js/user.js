@@ -22,7 +22,6 @@ let index = {
             dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
         }).done(function(resp){
             alert("회원가입이 완료 되었습니다.");   
-            alert(resp);
             location.href="/web";
 
         }).fail(function(error){
