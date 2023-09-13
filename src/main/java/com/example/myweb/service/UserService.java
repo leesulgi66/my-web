@@ -14,14 +14,7 @@ public class UserService {
     private MemberRepository memberRepository;
 
     @Transactional
-    public int save(Member member) {
-        try{
-            memberRepository.save(member);
-            return 1;
-        }catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("UserService : save() : "+e.getMessage());
-        }
-        return -1;
+    public void save(Member member) {
+        memberRepository.save(member);
     }
 }
