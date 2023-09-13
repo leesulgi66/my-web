@@ -124,6 +124,11 @@ body{
     color: white;
 }
 
+.content-button:hover {
+    cursor: pointer;
+    background-color: #999;
+}
+
 .form-group {
     padding: 1em;
     color: #444;
