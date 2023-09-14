@@ -14,6 +14,25 @@ let index = {
             email : $("#email").val(),
         }
 
+        console.log(data.username);
+        if(data.username == "") {
+            alert("아이디를 입력해 주세요");
+            return;
+        }else if(data.nickname == "") {
+            alert("닉네임을 입력해 주세요");
+            return;
+        }else if(data.password == "") {
+            alert("비밀번호를 입력해 주세요");
+            return;
+        }else if(data.password_re == "") {
+            alert("비밀번호 확인을 입력해 주세요");
+            return;
+        }else if(data.email == "") {
+            alert("이메일을 입력해 주세요");
+            return;
+        }
+
+        console.log("여기로 오나?");
         $.ajax({
             type:"POST",
             url: "/web/api/user/",
