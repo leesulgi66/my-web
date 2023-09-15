@@ -14,7 +14,6 @@ let index = {
             email : $("#email").val(),
         }
 
-        console.log(data.username);
         if(data.username == "") {
             alert("아이디를 입력해 주세요");
             return;
@@ -32,7 +31,11 @@ let index = {
             return;
         }
 
-        console.log("여기로 오나?");
+        if(data.password !== data.password_re) {
+            alert("비밀번호가 일치하지 않습니다.")
+            return;
+        }
+
         $.ajax({
             type:"POST",
             url: "/web/api/user/",
