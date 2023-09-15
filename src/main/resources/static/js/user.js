@@ -2,7 +2,11 @@ let index = {
     init: function() {
         $("#btn-save").on("click", ()=>{  // 화살표 함수 -> JavaScript 함수의 this 바인딩
             this.save();
-        })
+        });
+
+        $("#btn-login").on("click", ()=>{  // 화살표 함수 -> JavaScript 함수의 this 바인딩
+            this.login();
+        });
     },
 
     save: function() {
@@ -44,6 +48,36 @@ let index = {
             dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
         }).done(function(resp){
             alert("회원가입이 완료 되었습니다.");   
+            location.href="/web";
+
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
+
+    login: function() {
+        let data = {
+            username : $("#username").val(),
+            password : $("#password").val()
+
+        }
+
+        if(data.username == "") {
+            alert("아이디를 입력해 주세요");
+            return;
+        }else if(data.password == "") {
+            alert("비밀번호를 입력해 주세요");
+            return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url: "/web/api/user/login",
+            data: JSON.stringify(data),  // body date
+            contentType: "application/json; charset=utf-8", // dody data type(MIME)
+            dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
+        }).done(function(resp){
+            alert("로그인이 완료 되었습니다.");
             location.href="/web";
 
         }).fail(function(error){
