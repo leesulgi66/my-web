@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../style.css">
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <title>My-web</title>
 </head>
 <body>
@@ -22,11 +24,13 @@
                         <label for="username">password</label> <input type="password" class="form-control" placeholder="아이디를 입력하세요" id="password">
                     </div>
 
-                    <a id="btn-login" class="content-button submit-btn"> 로그인 </a>
                 </from>
+                <a id="btn-login" class="content-button submit-btn"> 로그인 </a>
             </div>
         </div>
     </div>
+
+    <script src="/web/js/user.js"></script>
     <div th:insert="~{/layout/footer :: footer}"></div>
 </body>
 </html>
