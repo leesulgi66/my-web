@@ -42,13 +42,13 @@ let index = {
 
         $.ajax({
             type:"POST",
-            url: "/web/api/user/",
+            url: "/api/user/",
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
             dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
         }).done(function(resp){
             alert("회원가입이 완료 되었습니다.");   
-            location.href="/web";
+            location.href="/";
 
         }).fail(function(error){
             alert(JSON.stringify(error));
@@ -72,13 +72,13 @@ let index = {
 
         $.ajax({
             type:"POST",
-            url: "/web/api/user/login",
+            url: "/api/user/login",
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
             dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
         }).done(function(resp){
             alert("로그인이 완료 되었습니다.");
-            location.href="/web";
+            location.href="/";
 
         }).fail(function(error){
             alert(JSON.stringify(error));

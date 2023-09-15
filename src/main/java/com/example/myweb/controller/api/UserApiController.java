@@ -4,12 +4,14 @@ import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.model.Member;
 import com.example.myweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 @RestController
 public class UserApiController {
