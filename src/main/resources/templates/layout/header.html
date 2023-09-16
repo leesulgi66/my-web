@@ -23,21 +23,17 @@
                     <li><a href="">수다</a></li>
                 </ul>
 
-                <c:choose>
-                    <c:when test="${empty sessionScope.principal}">
-                        <ul class="menu login out">
-                            <li><a href="/joinForm">JOIN</a></li>
-                            <li><a href="/loginForm">LOGIN</a></li>
-                        </ul>
-                    </c:when>
-                    <c:otherwise>
-                        <ul class="menu login in">
-                            <li>"${sessionScope.principal}"</li>
-                            <li><a href="/info">INFO</a></li>
-                            <li><a href="/logout">LOGOUT</a></li>
-                        </ul>
-                    </c:otherwise>
-                </c:choose>
+
+                <ul class="menu login out">
+                    <li><a sec:authorize="!isAuthenticated()" id="joinForm" href="/joinForm">JOIN</a></li>
+                    <li><a sec:authorize="!isAuthenticated()" id="loginForm" href="/loginForm">LOGIN</a></li>
+                </ul>
+
+                <ul class="menu login in">
+                    <li><a sec:authorize="isAuthenticated()" id="info-text" href="/info">INFO</a></li>
+                    <li><a sec:authorize="isAuthenticated()" id="logout-text" href="/logout">LOGOUT</a></li>
+                </ul>
+
                 
             </div>
         </div>
