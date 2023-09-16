@@ -1,8 +1,6 @@
-<!-- jstl Library -->
-<% @taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,24 +19,26 @@
                     오5리
                 </a>
                 <ul class="menu">
-                    <li><a href="/board/form">글쓰기</a></li>
-                    <li><a href="/chat">수다</a></li>
+                    <li><a href="">글쓰기</a></li>
+                    <li><a href="">수다</a></li>
                 </ul>
 
                 <c:choose>
                     <c:when test="${empty sessionScope.principal}">
-                        <ul class="menu login">
+                        <ul class="menu login out">
                             <li><a href="/joinForm">JOIN</a></li>
                             <li><a href="/loginForm">LOGIN</a></li>
                         </ul>
                     </c:when>
                     <c:otherwise>
-                        <ul class="menu login">
+                        <ul class="menu login in">
+                            <li>"${sessionScope.principal}"</li>
                             <li><a href="/info">INFO</a></li>
                             <li><a href="/logout">LOGOUT</a></li>
                         </ul>
                     </c:otherwise>
                 </c:choose>
+                
             </div>
         </div>
     </header>
