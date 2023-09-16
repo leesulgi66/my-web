@@ -23,18 +23,21 @@
                     <li><a href="">수다</a></li>
                 </ul>
 
-                <div th:text="${#authentication.principal}"></div>
-                <ul class="menu login out">
-                    <li><a sec:authorize="!isAuthenticated()" id="joinForm" href="/joinForm">JOIN</a></li>
-                    <li><a sec:authorize="!isAuthenticated()" id="loginForm" href="/loginForm">LOGIN</a></li>
-                </ul>
-
-                <ul class="menu login in">
-                    <li><a sec:authorize="isAuthenticated()" id="info-text" href="/info">INFO</a></li>
-                    <li><a sec:authorize="isAuthenticated()" id="logout-text" href="/logout">LOGOUT</a></li>
-                </ul>
-
-                
+<!--                <div th:text="${#authentication.principal}"></div>-->
+                <!-- 로그아웃상태 메뉴-->
+                <div sec:authorize="!isAuthenticated()">
+                    <ul class="menu login out">
+                        <li><a id="joinForm" href="/joinForm">JOIN</a></li>
+                        <li><a id="loginForm" href="/loginForm">LOGIN</a></li>
+                    </ul>
+                </div>
+                <!-- 로그인상태 메뉴-->
+                <div sec:authorize="isAuthenticated()">
+                    <ul class="menu login in">
+                        <li><a id="info-text" href="/info">INFO</a></li>
+                        <li><a id="logout-text" href="/logout">LOGOUT</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
