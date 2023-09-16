@@ -23,7 +23,7 @@
                     <li><a href="">수다</a></li>
                 </ul>
 
-
+                <div th:text="${#authentication.principal}"></div>
                 <ul class="menu login out">
                     <li><a sec:authorize="!isAuthenticated()" id="joinForm" href="/joinForm">JOIN</a></li>
                     <li><a sec:authorize="!isAuthenticated()" id="loginForm" href="/loginForm">LOGIN</a></li>
