@@ -42,7 +42,7 @@ let index = {
 
         $.ajax({
             type:"POST",
-            url: "/api/user/",
+            url: "/auth/join/",
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
             dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
@@ -55,35 +55,6 @@ let index = {
         });
     },
 
-    login: function() {
-        let data = {
-            username : $("#username").val(),
-            password : $("#password").val()
-
-        }
-
-        if(data.username == "") {
-            alert("아이디를 입력해 주세요");
-            return;
-        }else if(data.password == "") {
-            alert("비밀번호를 입력해 주세요");
-            return;
-        }
-
-        $.ajax({
-            type:"POST",
-            url: "/api/user/login",
-            data: JSON.stringify(data),  // body date
-            contentType: "application/json; charset=utf-8", // dody data type(MIME)
-            dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
-        }).done(function(resp){
-            alert("로그인이 완료 되었습니다.");
-            location.href="/";
-
-        }).fail(function(error){
-            alert(JSON.stringify(error));
-        });
-    }
 }
 
 index.init();

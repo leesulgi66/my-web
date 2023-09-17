@@ -27,8 +27,8 @@
                 <!-- 로그아웃상태 메뉴-->
                 <div sec:authorize="!isAuthenticated()">
                     <ul class="menu login out">
-                        <li><a id="joinForm" href="/joinForm">JOIN</a></li>
-                        <li><a id="loginForm" href="/loginForm">LOGIN</a></li>
+                        <li><a id="joinForm" href="/auth/joinForm">JOIN</a></li>
+                        <li><a id="loginForm" href="/auth/loginForm">LOGIN</a></li>
                     </ul>
                 </div>
                 <!-- 로그인상태 메뉴-->

@@ -37,7 +37,7 @@ body{
 
 .logo {
     text-indent: -99999px;
-    background-image: url(5duck.png);
+    background-image: url(/images/5duck.png);
     background-repeat: no-repeat;
     background-position: center;
     scale: 100%;
@@ -48,7 +48,7 @@ body{
 }
 
 .logo:hover {
-    background-image: url(5duck_hover.png);
+    background-image: url(/images/5duck_hover.png);
     transform: scale3d(1.05, 1.05, .8);
 }
 
