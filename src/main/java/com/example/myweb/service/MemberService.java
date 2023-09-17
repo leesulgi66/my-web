@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class UserService {
+public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
@@ -16,10 +16,5 @@ public class UserService {
     @Transactional
     public void save(Member member) {
         memberRepository.save(member);
-    }
-
-    @Transactional(readOnly = true)
-    public Member login(Member member) {
-        return memberRepository.findByUsernameAndPassword(member.getUsername(), member.getPassword());
     }
 }
