@@ -18,7 +18,6 @@ public class MemberApiController {
     @PostMapping("/auth/join")
     public ResponseDto<Integer> save(@RequestBody Member member) {
         System.out.println("UserApiController : save 호출됨");
-        member.setRole(Member.Role.USER);
         memberService.save(member);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
