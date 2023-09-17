@@ -29,7 +29,7 @@ public class Reply {
 
     @ManyToOne
     @JoinColumn(name = "memberID")
-    private Member member;
+    private User user;
 
     @CreationTimestamp
     private Timestamp timestamp;

@@ -33,7 +33,7 @@ public class Board {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="memberID")
-    private Member user;
+    private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Reply> reply;

@@ -1,7 +1,7 @@
 package com.example.myweb.service;
 
-import com.example.myweb.model.Member;
-import com.example.myweb.repository.MemberRepository;
+import com.example.myweb.model.User;
+import com.example.myweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,16 +12,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
-    public void save(Member member) {
-        String rawPassword = member.getPassword();
+    public void save(User user) {
+        String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
-        member.setPassword(encPassword);
-        member.setRole(Member.Role.USER);
-        memberRepository.save(member);
+        user.setPassword(encPassword);
+        user.setRole(User.Role.USER);
+        userRepository.save(user);
     }
 }
