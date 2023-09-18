@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/auth/loginForm")
+                .loginPage("/auth/loginForm") // login page
                 .loginProcessingUrl("/auth/login")  // login 요청주소
                 .defaultSuccessUrl("/"); // login 성공시 이동주소
         return http.build();
