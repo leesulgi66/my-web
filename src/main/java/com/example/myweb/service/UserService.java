@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
-public class MemberService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
