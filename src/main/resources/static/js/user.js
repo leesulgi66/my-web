@@ -3,6 +3,10 @@ let index = {
         $("#btn-save").on("click", ()=>{  // 화살표 함수 -> JavaScript 함수의 this 바인딩
             this.save();
         });
+
+        $("#login-button").on("click", ()=>{
+            this.chk_form();
+        });
     },
 
     save: function() {
@@ -17,16 +21,20 @@ let index = {
         if(data.username == "") {
             alert("아이디를 입력해 주세요");
             return;
-        }else if(data.nickname == "") {
+        }
+        if(data.nickname == "") {
             alert("닉네임을 입력해 주세요");
             return;
-        }else if(data.password == "") {
+        }
+        if(data.password == "") {
             alert("비밀번호를 입력해 주세요");
             return;
-        }else if(data.password_re == "") {
+        }
+        if(data.password_re == "") {
             alert("비밀번호 확인을 입력해 주세요");
             return;
-        }else if(data.email == "") {
+        }
+        if(data.email == "") {
             alert("이메일을 입력해 주세요");
             return;
         }
@@ -51,6 +59,17 @@ let index = {
         });
     },
 
+    chk_form : function() {
+        if(document.getElementById("username").value==''){
+        	alert("성명을 입력해주십시오.");
+        	return false;
+        }
+        if(document.getElementById("password").value==''){
+        	alert("비밀번호를 입력해주십시오.");
+        	return false;
+        }
+        document.getElementById('frm').submit();
+    }
 }
 
 index.init();
