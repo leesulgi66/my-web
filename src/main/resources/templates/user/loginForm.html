@@ -16,7 +16,7 @@
     <div class="content">
         <div class="wrapper clearfix">
             <div>
-                <form action="/auth/login" method="post">
+                <form id="frm" action="/auth/login" method="post">
                     <div class="form-group">
                         <label for="username">username</label>
                         <input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" id="username">
@@ -26,8 +26,7 @@
                         <label for="username">password</label>
                         <input type="password" name="password" class="form-control" placeholder="아이디를 입력하세요" id="password">
                     </div>
-                    <a type="submit"  class="content-button submit-btn"> 로그인 </a>
-                    <button class="content-button submit-btn"> 로그인 </button>
+                    <a id="login-button" class="content-button submit-btn"> 로그인 </a>
                 </form>
             </div>
         </div>
