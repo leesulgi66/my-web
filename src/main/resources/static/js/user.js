@@ -7,6 +7,12 @@ let index = {
         $("#login-button").on("click", ()=>{
             this.chk_form();
         });
+
+        $("#email").on("keydown", (key)=>{
+            if(key.keyCode==13) {
+                this.save();
+            }
+        });
     },
 
     save: function() {
