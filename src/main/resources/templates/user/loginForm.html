@@ -35,11 +35,20 @@
     <script>
         function enterkey() {
             if (window.event.keyCode == 13) {
-                // 엔터키가 눌렸을 때
+                if(document.getElementById("username").value==''){
+                    alert("성명을 입력해주십시오.");
+                    return false;
+                }
+                if(document.getElementById("password").value==''){
+                    alert("비밀번호를 입력해주십시오.");
+                    return false;
+                }else {
                 frm.submit();
+                }
             }
         }
     </script>
+
     <script src="/js/user.js"></script>
     <div th:insert="~{/layout/footer :: footer}"></div>
 </body>
