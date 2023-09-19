@@ -24,7 +24,7 @@
 
                     <div class="form-group">
                         <label for="username">password</label>
-                        <input type="password" name="password" class="form-control" placeholder="아이디를 입력하세요" id="password">
+                        <input type="password" name="password" class="form-control" placeholder="아이디를 입력하세요" id="password" onkeyup="enterkey()">
                     </div>
                     <a id="login-button" class="content-button submit-btn"> 로그인 </a>
                 </form>
@@ -32,6 +32,14 @@
         </div>
     </div>
 
+    <script>
+        function enterkey() {
+            if (window.event.keyCode == 13) {
+                // 엔터키가 눌렸을 때
+                frm.submit();
+            }
+        }
+    </script>
     <script src="/js/user.js"></script>
     <div th:insert="~{/layout/footer :: footer}"></div>
 </body>
