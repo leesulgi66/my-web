@@ -134,6 +134,12 @@ body{
     color: #444;
 }
 
+.form-control {
+    display: inline-block;
+    height: 1.8em;
+    border-radius: .3em;
+}
+
 .footer {
     border-top: 1px solid #333;
     margin-top: 1em;
