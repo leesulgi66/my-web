@@ -55,10 +55,24 @@ let index = {
             url: "/auth/join/",
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
-            dataType: "json" // reponse가 json 형식이라면 javascript로 변경해줌
+            dataType: "json", // reponse가 json 형식이라면 javascript로 변경해줌
+            success: function (data) {
+                    console.log(data)
+                },
+            error: function (request, status, error) {
+                console.log("code: " + request.status)
+                console.log("message: " + request.responseText)
+                console.log("error: " + error);
+            }
         }).done(function(resp){
-            alert("회원가입이 완료 되었습니다.");   
-            location.href="/";
+            console.log(resp);
+            if(resp.status == 500) {
+                alert(resp.data);
+                location.href="/auth/joinForm";
+            }else {
+                alert("회원가입이 완료 되었습니다.");
+                location.href="/";
+            }
 
         }).fail(function(error){
             alert(JSON.stringify(error));
