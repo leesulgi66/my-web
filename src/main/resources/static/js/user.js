@@ -67,7 +67,8 @@ let index = {
         }).done(function(resp){
             console.log(resp);
             if(resp.status == 500) {
-                alert(resp.data);
+                //alert(resp.data);
+                alert("회원가입에 실패했습니다.");
                 location.href="/auth/joinForm";
             }else {
                 alert("회원가입이 완료 되었습니다.");
