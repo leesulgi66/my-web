@@ -19,7 +19,7 @@
                     오5리
                 </a>
                 <ul class="menu">
-                    <li><a href="/test/test">글쓰기</a></li>
+                    <li><a href="/board/saveForm">글쓰기</a></li>
                     <li><a href="">수다</a></li>
                 </ul>
 
@@ -34,7 +34,7 @@
                 <!-- 로그인상태 메뉴-->
                 <div sec:authorize="isAuthenticated()">
                     <ul class="menu login in">
-                        <li><a id="info-text" href="/info">INFO</a></li>
+                        <li><a id="info-text" href="/user/info">INFO</a></li>
                         <li><a id="logout-text" href="/logout">LOGOUT</a></li>
                     </ul>
                 </div>
