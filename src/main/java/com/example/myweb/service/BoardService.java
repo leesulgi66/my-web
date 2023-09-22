@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 public class BoardService {
@@ -18,6 +20,9 @@ public class BoardService {
     public void BoardSave(Board board, User user) {
         board.setUser(user);
         boardRepository.save(board);
+    }
 
+    public List<Board> boardList() {
+        return boardRepository.findAll();
     }
 }
