@@ -24,7 +24,7 @@
                 <a href="/?page=0">처음</a>
             </li>
             <li th:if="${boards.first}">
-                <a class="disable" th:href="@{/(page=${boards.number-1})}">!전</a>
+                <a class="disable">!전</a>
             </li>
             <li th:if="${!boards.first}">
                 <a class="disable" th:href="@{/(page=${boards.number-1})}">전</a>
@@ -33,10 +33,10 @@
             <li class="board-page-count" th:text="${boards.pageable.pageNumber+1}"></li>
 
             <li th:if="${!boards.last}">
-                <a class="disable" th:href="@{/(page=${boards.number+1})}">후</a>
+                <a class="" th:href="@{/(page=${boards.number+1})}">후</a>
             </li>
             <li th:if="${boards.last}">
-                <a class="disable" th:href="@{/(page=${boards.number+1})}">!후</a>
+                <a class="disable">!후</a>
             </li>
 
         </ul>
