@@ -20,11 +20,11 @@
         </div>
 
         <ul class="board-ul">
-            <li class="board-page-btn" th:if="${boards.first}">
-                <a class="disabled">이전</a>
+            <li class="board-page-btn disabled" th:if="${boards.first}">
+                <a>🔙</a>
             </li>
             <li class="board-page-btn" th:if="${!boards.first}">
-                <a class="" th:href="@{/(page=${boards.number-1})}">이전</a>
+                <a class="" th:href="@{/(page=${boards.number-1})}">🔙</a>
             </li>
 
             <li class="board-page-count">
@@ -32,10 +32,10 @@
             </li>
 
             <li class="board-page-btn" th:if="${!boards.last}">
-                <a class="" th:href="@{/(page=${boards.number+1})}">이후</a>
+                <a class="" th:href="@{/(page=${boards.number+1})}">🔜</a>
             </li>
-            <li class="board-page-btn" th:if="${boards.last}">
-                <a class="disabled">이후</a>
+            <li class="board-page-btn disabled" th:if="${boards.last}">
+                <a>🔜</a>
             </li>
 
         </ul>

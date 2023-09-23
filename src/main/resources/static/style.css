@@ -155,16 +155,20 @@ body{
     color: white;
 }
 
+.board-ul .board-page-count {
+    padding : 0.1em;
+}
+
 .board-ul .board-page-btn a{
     padding: .4em;
 }
 
-.board-ul .board-page-btn .disabled{
-    color : #a8a8a8;
-}
-
 .board-page-count a::after {
     content: "page";
+}
+
+.board-ul .board-page-btn.disabled{
+    background-color : #3f3f3f;
 }
 
 .footer {
