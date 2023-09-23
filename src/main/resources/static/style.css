@@ -140,7 +140,30 @@ body{
     border-radius: .3em;
 }
 
-.board-page-count::after {
+.board-ul {
+    text-align: center;
+    margin: .6em auto;
+    padding: .5em;
+    border-radius: .5em;
+}
+
+.board-ul .board-page-btn,
+.board-page-count {
+    display: inline-block;
+    background-color: gray;
+    border-radius: .4em;
+    color: white;
+}
+
+.board-ul .board-page-btn a{
+    padding: .4em;
+}
+
+.board-ul .board-page-btn .disabled{
+    color : #a8a8a8;
+}
+
+.board-page-count a::after {
     content: "page";
 }
 

@@ -19,24 +19,23 @@
             <a class="content-button" href=""> 상세 보기 </a>
         </div>
 
-        <ul class="justify-content-center">
-            <li th:if="${!boards.first}">
-                <a href="/?page=0">처음</a>
+        <ul class="board-ul">
+            <li class="board-page-btn" th:if="${boards.first}">
+                <a class="disabled">이전</a>
             </li>
-            <li th:if="${boards.first}">
-                <a class="disable">!전</a>
-            </li>
-            <li th:if="${!boards.first}">
-                <a class="disable" th:href="@{/(page=${boards.number-1})}">전</a>
+            <li class="board-page-btn" th:if="${!boards.first}">
+                <a class="" th:href="@{/(page=${boards.number-1})}">이전</a>
             </li>
 
-            <li class="board-page-count" th:text="${boards.pageable.pageNumber+1}"></li>
-
-            <li th:if="${!boards.last}">
-                <a class="" th:href="@{/(page=${boards.number+1})}">후</a>
+            <li class="board-page-count">
+                <a href="/?page=0" th:text="${boards.pageable.pageNumber+1}"></a>
             </li>
-            <li th:if="${boards.last}">
-                <a class="disable">!후</a>
+
+            <li class="board-page-btn" th:if="${!boards.last}">
+                <a class="" th:href="@{/(page=${boards.number+1})}">이후</a>
+            </li>
+            <li class="board-page-btn" th:if="${boards.last}">
+                <a class="disabled">이후</a>
             </li>
 
         </ul>
