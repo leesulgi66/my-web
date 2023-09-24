@@ -95,20 +95,27 @@ body{
 }
 
 .content {
+    background-color: rgb(117, 117, 117);
     margin: 1em auto;
+    padding: 1em;
     width: 40em;
+    border-radius: .4em;
 }
 
 .content .wrapper {
     background-color: antiquewhite;
-    width: inherit;
-    margin-top: 1em ;
-    border-radius: .6em; 
+    width: 100%;
+    margin-top: .4em ;
+    border-radius: .4em; 
 }
 
-.content h1 , p{
+.board-write-form {
+    width: inherit;
+}
+
+.content .title-h1, p{
     color: rgb(90, 82, 82);
-    padding: .5em;
+    padding: .7em;
 }
 
 .content p {
@@ -127,6 +134,10 @@ body{
 .content-button:hover {
     cursor: pointer;
     background-color: #999;
+}
+
+input { 
+    border:1px solid #ced4da;
 }
 
 .form-group {
