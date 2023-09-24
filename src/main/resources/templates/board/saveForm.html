@@ -19,8 +19,8 @@
     <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
     <div th:insert="~{/layout/header :: header}"></div>
     <div class="content">
-        <div class="wrapper clearfix">
-            <form>
+        <div class="wrapper saveForm clearfix ">
+            <form class="board-write-form">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title">

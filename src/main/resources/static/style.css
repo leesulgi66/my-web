@@ -109,6 +109,11 @@ body{
     border-radius: .4em; 
 }
 
+.content .wrapper > .boards-title{
+    border:1px solid #ced4da;
+    border-radius: .4em; 
+}
+
 .board-write-form {
     width: inherit;
 }
@@ -143,6 +148,10 @@ input {
 .form-group {
     padding: 1em;
     color: #444;
+}
+
+.form-group.title {
+    margin-left: 1em;
 }
 
 .form-control {
@@ -180,6 +189,10 @@ input {
 
 .board-ul .board-page-btn.disabled{
     background-color : #3f3f3f;
+}
+
+.submit-btn.detail {
+    margin: .4em;
 }
 
 .footer {
