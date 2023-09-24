@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class BoardController {
@@ -19,6 +20,12 @@ public class BoardController {
     public String index(Model model, @PageableDefault(size=10, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
         model.addAttribute("boards", boardService.boardList(pageable));
         return "index";
+    }
+
+    @GetMapping("/board/{id}")
+    public String findByid(Model model,@PathVariable Long id) {
+        model.addAttribute("board", boardService.boardDetail(id));
+        return "board/detail";
     }
 
     @GetMapping("/board/saveForm")
