@@ -13,8 +13,8 @@
     <div th:insert="~{/layout/header :: header}"></div>
     <div class="content">
         <div class="wrapper clearfix" th:each="board : ${boards}">
-            <div>
-                <a class="title-h1" href="" th:text="${board.title}"></a>
+            <div class="boards-title">
+                <a class="title-h1" th:href="@{/board/{id}(id = ${board.id})}" th:text="${board.title}"></a>
             </div>
             <!-- <a class="content-button" href=""> 상세 보기 </a> -->
         </div>
