@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../style.css">
+    <title>My-web</title>
+</head>
+<body style="background-color: black;">
+    <!-- th:insert="~{ [ 템플릿 조각 경로 ] :: 조각명 }"  분할 -->
+    <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
+    <div th:insert="~{/layout/header :: header}"></div>
+    <div class="content">
+        <div class="wrapper saveForm clearfix ">
+            <div class="form-group title">
+                <h3 th:text="${board.title}">title</h3>
+            </div>
+            <hr />
+            <div class="form-group">
+                <p th:utext="${board.content}">content</p>
+            </div>
+            <a id="btn-back" class="content-button submit-btn detail" style="color: white;" onclick="history.back()">🔙</a>
+            <a id="btn-update" class="content-button submit-btn detail" style="color: white;"> 수정 </a>
+            <a id="btn-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
+        </div>
+    </div>
+    <div th:insert="~{/layout/footer :: footer}"></div>
+</body>
+
+<script src="/js/board.js"></script>
+</html>
