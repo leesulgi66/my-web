@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <!--태그 안의 텍스트를 서버에서 전달 받은 값에 따라 표현하고자 할 때 사용된다.-->
+    <h6>1. th:text 예시</h6>
+    <span th:text="${hello}">message</span>
+    <span>님 안녕하세요!</span>
+    <br>
+
+    <!--변수에서 받은 값에서 html태그가 있다면 태그값을 반영해서 표시해준다-->
+    <h6>2. th:utext 예시</h6>
+    <th:block th:utext="${hello}">message</th:block>
+
+    <br>
+
+    <!--input 안에 엘리먼트들의 value값을 지정할 수 있다.-->
+    <h6>3. th:value 예시</h6>
+    <input th:value="${hello}" style="width: 100px; height:30px;">
+
+    <!--변수 값을 지정해서 사용할 수 있다.-->
+    <h6>4. th:with 예시</h6>
+    <div th:with="temp=${hello}" th:text="${temp}"></div>
+    <br>
+    <div th:with="ref01='몰랑', ref02='피우', ref03=10">
+        <h4 th:text="${ref01}"></h4>
+        <h4 th:text="${ref02}"></h4>
+    <br>
+
+    <!--Switch-case문이 필요할 때 사용한다.-->
+    <h6>5. th:switch 예시</h6>
+    <div th:switch="${hello}">
+        <p th:case="'admin'">admin
+        <p th:case="#{hello}=='user'">User
+        <p th:case="*">*입니다
+    </div>
+    <br>
+
+    <!--조건문이 필요할 때 사용한다.  else문이 필요한 경우에는 th:unless를 사용한다.-->
+    <h6>6. th:if 예시</h6>
+    <p th:if="${hello}=='web'" th:text="${hello}"></p>
+    <p th:unless="${true}" th:text="${hello}">
+        unless 입니다
+    </p>
+    <br>
+
+    <!--반복문이 필요한 경우에 사용한다.-->
+    <h6>7. th:each 예시</h6>
+    <div class="btn-group" th:each="item:${itemList}">
+        <button class="btn btn-secondary" th:value="${item.landmarkSn}" th:text="${item.landmarkName}"
+                style="margin: 5px;"></button>
+    </div>
+    <br>
+</body>
+</html>
