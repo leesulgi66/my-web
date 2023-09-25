@@ -9,8 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 
 @Service
 public class BoardService {
@@ -19,18 +17,25 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public void BoardSave(Board board, User user) {
+    public void boardSave(Board board, User user) {
         board.setUser(user);
         boardRepository.save(board);
     }
 
+    @Transactional(readOnly = true)
     public Page<Board> boardList(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
     public Board boardDetail(Long id) {
         return boardRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
         });
+    }
+
+    @Transactional
+    public void boardDelete(Long id) {
+        boardRepository.deleteById(id);
     }
 }
