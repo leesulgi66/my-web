@@ -14,6 +14,10 @@
     <div th:insert="~{/layout/header :: header}"></div>
     <div class="content">
         <div class="wrapper saveForm clearfix ">
+            <div style="text-align:right;">
+                <span id="id" style="display:none ;" th:utext="${board.id} "></span>
+                작성자:<span th:utext="${board.user.nickname} "></span>
+            </div>
             <div class="form-group title">
                 <h3 th:text="${board.title}">title</h3>
             </div>
@@ -22,8 +26,11 @@
                 <p th:utext="${board.content}">content</p>
             </div>
             <a id="btn-back" class="content-button submit-btn detail" style="color: white;" onclick="history.back()">🔙</a>
-            <a id="btn-update" class="content-button submit-btn detail" style="color: white;"> 수정 </a>
-            <a id="btn-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
+            <div th:if="${board.user.id} == ${#authentication.principal.user.id}">
+                <a id="board-update" class="content-button submit-btn detail" style="color: white;"> 수정 </a>
+                <a id="board-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
+            </div>
+
         </div>
     </div>
     <div th:insert="~{/layout/footer :: footer}"></div>
