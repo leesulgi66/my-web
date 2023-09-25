@@ -7,9 +7,7 @@ import com.example.myweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class BoardApiController {
@@ -19,8 +17,15 @@ public class BoardApiController {
 
     @PostMapping("/api/board")
     public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
-        System.out.println("BoardApiController : 호출됨");
-        boardService.BoardSave(board, principal.getUser());
+        System.out.println("BoardApiController : save 호출됨");
+        boardService.boardSave(board, principal.getUser());
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @DeleteMapping("/api/board/{id}")
+    public ResponseDto<Integer> delete(@PathVariable Long id) {
+        System.out.println("BoardApiController : delete 호출됨");
+        boardService.boardDelete(id);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
