@@ -55,5 +55,11 @@
                 style="margin: 5px;"></button>
     </div>
     <br>
+
+    <h6>8. th:href 예시</h6>
+        <!-- 변수를 삽입 할 때 -->
+       <a th:href="@{/board/{id}(id = ${board.id})}" >클릭하세요</a>
+        <!-- 동적 쿼리를 날릴 때 -->
+       <a th:href="@{/(page=${boards.number})}" >클릭하세요</a>
 </body>
 </html>
