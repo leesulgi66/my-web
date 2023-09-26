@@ -35,6 +35,12 @@ body{
     color: #999;
 }
 
+.header .wrapper a {
+    color : inherit;
+    text-decoration: none;
+    list-style-type: none;
+}
+
 .logo {
     text-indent: -99999px;
     background-image: url(/images/5duck.png);
