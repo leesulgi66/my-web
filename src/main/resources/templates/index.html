@@ -14,6 +14,7 @@
     <div class="content">
         <div class="wrapper clearfix" th:each="board : ${boards}">
             <div class="boards-title">
+                <a th:utext="${board.id}" style="padding: .4em"></a>
                 <a class="title-h1" th:href="@{/board/{id}(id = ${board.id})}" th:text="${board.title}"></a>
             </div>
             <!-- <a class="content-button" href=""> 상세 보기 </a> -->
