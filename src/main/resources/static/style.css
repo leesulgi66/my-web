@@ -202,6 +202,8 @@ input {
 }
 
 .footer {
+    position: relative;
+    transform: translate(0, 60%);
     border-top: 1px solid #333;
     margin-top: 1em;
     padding: 1em 0;
