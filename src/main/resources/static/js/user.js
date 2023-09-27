@@ -82,7 +82,7 @@ let index = {
 
     chk_form : function() {
         if(document.getElementById("username").value==''){
-        	alert("성명을 입력해주십시오.");
+        	alert("아이디를 입력해주십시오.");
         	return false;
         }
         if(document.getElementById("password").value==''){
