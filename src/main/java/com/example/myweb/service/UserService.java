@@ -1,5 +1,6 @@
 package com.example.myweb.service;
 
+import com.example.myweb.config.auth.PrincipalDetail;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,15 @@ public class UserService {
     }
 
     @Transactional
-    public void update(User user) {
+    public void update(User user, PrincipalDetail principal) {
         User persistence = userRepository.findById(user.getId()).orElseThrow(()->{
             return new IllegalArgumentException("회원 찾기 실패");
         });
         String rawPassword = user.getPassword();
-        String encodPassword = passwordEncoder.encode(rawPassword);
-        persistence.setPassword(encodPassword);
+        String encPassword = passwordEncoder.encode(rawPassword);
+        persistence.setPassword(encPassword);
         persistence.setNickname(user.getNickname());
         persistence.setEmail(user.getEmail());
+        principal.setUser(persistence);
     }
 }
