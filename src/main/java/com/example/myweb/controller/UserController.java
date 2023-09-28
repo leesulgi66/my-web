@@ -18,4 +18,10 @@ public class UserController {
 
         return "user/loginForm";
     }
+
+    @GetMapping("/user/info")
+    public String userInfo() {
+
+        return "user/info";
+    }
 }
