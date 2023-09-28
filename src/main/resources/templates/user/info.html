@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <title>My-web</title>
+</head>
+<body>
+    <!-- th:insert="~{ [ 템플릿 조각 경로 ] :: 조각명 }"  분할 -->
+    <!-- th:insert => 조각을 <div>안에 넣음  // th:replace => 조각을 <div>와 교체  -->
+    <div th:insert="~{/layout/header :: header}"></div>
+    <div class="content">
+        <div class="wrapper clearfix">
+            <div>
+                <form action="/action_page.php">
+                    <input type="hidden" id="id" th:value="${#authentication.principal.user.id}"/>
+                    <div class="form-group">
+                        <label for="username">username</label> <input th:value="${#authentication.principal.user.username}" type="text" class="form-control readonly" id="username" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">nickname</label> <input th:value="${#authentication.principal.user.nickname}" type="text" class="form-control" placeholder="닉네임을 입력하세요" id="nickname">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">password</label> <input type="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">password</label> <input type="password" class="form-control" placeholder="비밀번호를 확인해 주세요" id="password-re">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="username">email</label> <input th:value="${#authentication.principal.user.email}" type="email" class="form-control" placeholder="이메일을 입력하세요" id="email-update">
+                    </div>
+
+                </form>
+                <a id="btn-update" class="content-button submit-btn"> 회원 수정 </a>
+            </div>
+        </div>
+    </div>
+    <script src="/js/user.js"></script>
+    <div th:insert="~{/layout/footer :: footer}"></div>
+</body>
+</html>
