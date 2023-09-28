@@ -165,6 +165,10 @@ input {
     border-radius: .3em;
 }
 
+.form-control.readonly {
+    background-color: #cfcfcf;
+}
+
 .board-ul {
     text-align: center;
     margin: .6em auto;
