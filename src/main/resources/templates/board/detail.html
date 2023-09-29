@@ -27,7 +27,7 @@
             </div>
             <a id="btn-back" class="content-button submit-btn detail" style="color: white;" onclick="history.back()">🔙</a>
             <div th:if="${board.user.id} == ${#authentication.principal.user.id}">
-                <a th:href=@{/board/{id}/updateForm(id=${board.id})} id="board-update" class="content-button submit-btn detail" style="color: white;"> 수정 </a>
+                <a th:href=@{/board/{boardId}/updateForm(boardId=${board.id})} class="content-button submit-btn detail" style="color: white;"> 수정 </a>
                 <a id="board-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
             </div>
 
