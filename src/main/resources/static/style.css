@@ -123,9 +123,14 @@ body{
     width: inherit;
 }
 
+.content .title-num, p{
+    padding-left: .4em;
+}
+
 .content .title-h1, p{
     color: rgb(90, 82, 82);
-    padding: .7em;
+    width: 100%;
+    padding-left: .7em;
 }
 
 .content p {
@@ -144,6 +149,10 @@ body{
 .content-button:hover {
     cursor: pointer;
     background-color: #999;
+}
+
+.content-button.submit-btn.info-second {
+    margin-left:0;
 }
 
 input { 
