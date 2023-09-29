@@ -61,5 +61,27 @@
        <a th:href="@{/board/{id}(id = ${board.id})}" >클릭하세요</a>
         <!-- 동적 쿼리를 날릴 때 -->
        <a th:href="@{/(page=${boards.number})}" >클릭하세요</a>
+
+
+    <div>
+    param1 - data1
+    param2 - data2
+
+    일반 url
+    <a th:href="@{/hello}"></a>
+    <br>
+
+    파라미터 값 넣기
+    <a th:href="@{/hello(param1=${param1}, param2=${param2})}">/hello?param1=data1&param2=data2</a>
+    <br>
+
+    변수로 url만들기
+    <a h:href="@{/hello/{param1}/{param2}(param1=${param1}, param2=${param2})}">/hello/data1/data2</a>
+    <br>
+
+    변수로 url만들고 나머지는 파라미터 값으로 넣기
+    <a th:href="@{/hello/{param1}(param1=${param1}, param2=${param2})}">/hello/data1?param2=data2</a>
+    <br>
+    </div>
 </body>
 </html>
