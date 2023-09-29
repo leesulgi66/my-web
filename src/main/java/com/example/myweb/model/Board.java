@@ -32,7 +32,7 @@ public class Board {
     private long count;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="memberID")
+    @JoinColumn(name="userId")
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
