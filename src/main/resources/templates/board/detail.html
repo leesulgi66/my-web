@@ -30,7 +30,12 @@
                 <a th:href=@{/board/{boardId}/updateForm(boardId=${board.id})} class="content-button submit-btn detail" style="color: white;"> 수정 </a>
                 <a id="board-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
             </div>
-
+        </div>
+        <div>
+            <div class="clearfix">
+                <textarea class="form-control reply"></textarea>
+                <a class="content-button reply" >댓글</a>
+            </div>
         </div>
     </div>
     <div th:insert="~{/layout/footer :: footer}"></div>

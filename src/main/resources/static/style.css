@@ -146,9 +146,20 @@ body{
     color: white;
 }
 
+.content-button.reply {
+    float: right;
+    background-color: antiquewhite;
+    color: gray;
+}
+
 .content-button:hover {
     cursor: pointer;
     background-color: #999;
+}
+
+.content-button.reply:hover {
+    cursor: pointer;
+    background-color: rgb(255, 217, 167);
 }
 
 .content-button.submit-btn.info-second {
@@ -168,10 +179,20 @@ input {
     margin-left: 1em;
 }
 
-.form-control {
+.form-reply {
     display: inline-block;
     height: 1.8em;
     border-radius: .3em;
+}
+
+.form-control.reply {
+    width: 80%;
+    font-size: 1.2em;
+    height: 2em;
+    resize: vertical;
+    border:1px solid #ced4da;
+    border-radius: .4em;
+    margin: 1em;
 }
 
 .form-control.readonly {
