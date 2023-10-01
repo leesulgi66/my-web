@@ -162,12 +162,21 @@ body{
     background-color: rgb(255, 217, 167);
 }
 
+.content-button.reply.delete {
+    margin: 0;
+}
+
 .content-button.submit-btn.info-second {
     margin-left:0;
 }
 
 input { 
     border:1px solid #ced4da;
+    border-radius: .3em;
+}
+
+input:focus {
+    outline:1px solid #9da9b4;
 }
 
 .form-group {
@@ -193,6 +202,8 @@ input {
     border:1px solid #ced4da;
     border-radius: .4em;
     margin: 1em;
+    border:1px solid #ced4da;
+    border-radius: .3em;
 }
 
 .form-control.readonly {
