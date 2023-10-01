@@ -163,11 +163,23 @@ body{
 }
 
 .content-button.reply.delete {
+    display: inline-block;
     margin: 0;
 }
 
 .content-button.submit-btn.info-second {
     margin-left:0;
+}
+
+.reply-list {
+    color:white;
+}
+
+.reply-items{
+    color: white;
+    line-height: 0;
+    margin-left: 1em;
+    display: inline-block;
 }
 
 input { 

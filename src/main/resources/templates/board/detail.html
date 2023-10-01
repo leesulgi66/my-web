@@ -31,11 +31,18 @@
                 <a id="board-delete" class="content-button submit-btn detail" style="color: white;"> 삭제 </a>
             </div>
         </div>
-        <div>
-            <div class="clearfix">
-                <textarea class="form-control reply"></textarea>
-                <a class="content-button reply" >댓글</a>
-            </div>
+        <div class="reply-list">댓글 리스트 <span>▼</span></div>
+        <div class="reply-box clearfix">
+            <ul>
+                <li class="clearfix">
+                    <span class="reply-items">first items</span>
+                    <a class="content-button reply delete" >삭제</a>
+                </li>
+            </ul>
+        </div>
+        <div class="reply-write-box clearfix">
+            <textarea class="form-control reply"></textarea>
+            <a class="content-button reply" >댓글</a>
         </div>
     </div>
     <div th:insert="~{/layout/footer :: footer}"></div>
