@@ -1,6 +1,7 @@
 package com.example.myweb.controller.api;
 
 import com.example.myweb.config.auth.PrincipalDetail;
+import com.example.myweb.dto.ReplyDto;
 import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.model.Board;
 import com.example.myweb.service.BoardService;
@@ -31,8 +32,16 @@ public class BoardApiController {
 
     @PutMapping("/api/board/{id}")
     public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board) {
+        System.out.println("BoardApiController : update 호출됨");
         boardService.boardUpdate(id, board);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
 
+    }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> replySave(@PathVariable Long boardId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
+        System.out.println("BoardApiController : reply save 호출됨");
+        boardService.replySave(boardId, replyDto, principal.getUser());
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
