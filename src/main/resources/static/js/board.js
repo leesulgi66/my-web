@@ -83,7 +83,7 @@ let index = {
                 if(resp.status == 500) {
                     //alert(resp.data);
                     alert("삭제가 실패했습니다.");
-                    location.href="/auth/joinForm";
+                    location.href="/board/"+id;
                 }else {
                     alert("삭제가 완료 되었습니다.");
                     location.href="/";
@@ -172,7 +172,7 @@ let index = {
                 alert("댓글작성이 실패했습니다.");
                 location.href=`/board/${data.boardId}`;
             }else {
-                alert("댓글작성이 완료 되었습니다.");
+                //alert("댓글작성이 완료 되었습니다.");
                 location.href=`/board/${data.boardId}`;
             }
         }).fail(function(error){

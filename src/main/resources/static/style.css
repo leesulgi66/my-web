@@ -165,7 +165,7 @@ body{
 .content-button.reply.delete,
 .content-button.reply.re-reply {
     display: inline-block;
-    font-size: .9em;
+    font-size: .7em;
     margin: 0;
     margin-right: 1em;
     padding: .2em;
@@ -195,6 +195,10 @@ body{
 
 .reply-items > .name{
     font-style: italic;
+}
+
+#reply--1 > .contents {
+    word-wrap: break-word;
 }
 
 input { 
