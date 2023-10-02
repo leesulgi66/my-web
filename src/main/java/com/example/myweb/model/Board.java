@@ -38,6 +38,7 @@ public class Board {
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     @JsonIgnoreProperties({"board"}) // 무한참조 방지
+    @OrderBy("id desc")
     private List<Reply> replies;
 
     @CreationTimestamp
