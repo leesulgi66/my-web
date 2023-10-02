@@ -1,8 +1,11 @@
 package com.example.myweb.service;
 
+import com.example.myweb.dto.ReplyDto;
 import com.example.myweb.model.Board;
+import com.example.myweb.model.Reply;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
+import com.example.myweb.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,9 @@ public class BoardService {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
 
     @Transactional
     public void boardSave(Board board, User user) {
@@ -46,5 +52,19 @@ public class BoardService {
         });
         board.setTitle(requestBoard.getTitle());
         board.setContent(requestBoard.getContent());
+    }
+
+    @Transactional
+    public void replySave(Long boardId, ReplyDto requestReply, User user) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()->{
+            return new IllegalArgumentException("게시글을 찾을 수 없습니다.");
+        });
+
+        Reply reply = new Reply();
+        reply.setBoard(board);
+        reply.setContent(requestReply.getContent());
+        reply.setUser(user);
+
+        replyRepository.save(reply);
     }
 }
