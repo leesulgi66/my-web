@@ -192,7 +192,7 @@ let index = {
                         location.href="/user/info";
                     }else {
                         alert("회원 탈퇴에 완료 되었습니다.");
-                        location.href="/";
+                        location.href="/logout";
                     }
 
                 }).fail(function(error){
