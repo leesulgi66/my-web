@@ -3,6 +3,7 @@ package com.example.myweb.service;
 import com.example.myweb.config.auth.PrincipalDetail;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
+import com.example.myweb.repository.ReplyRepository;
 import com.example.myweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,9 +16,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -48,6 +50,7 @@ public class UserService {
         User delUser = userRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
         });
+        replyRepository.deleteAllByUserId(delUser.getId());
         boardRepository.deleteAllByUserId(delUser.getId());
         userRepository.delete(delUser);
     }
