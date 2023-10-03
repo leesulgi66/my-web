@@ -35,9 +35,9 @@
         <div class="reply-box clearfix">
             <ul id="reply--box">
                 <div th:each="reply:${board.replies}" >
-                    <li id="reply--1" class="reply-items clearfix">
-                        <a class="content-button reply delete" >삭제</a>
+                    <li th:id="'reply--'+${reply.id}" class="reply-items clearfix">
                         <a class="content-button reply re-reply" >답글</a>
+                        <a th:if="${reply.user.id} == ${#authentication.principal.user.id}" th:onclick="index.replyDelete([[${board.id}]], [[${reply.id}]])" class="content-button reply delete" >삭제</a>
                         <div th:text="${reply.user.username}" class="name">작성자</div>
                         <div th:text="${reply.content}" class="contents"></div>
                     </li>
