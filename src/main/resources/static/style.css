@@ -167,14 +167,14 @@ body{
     display: inline-block;
     font-size: .7em;
     margin: 0;
-    margin-right: 1em;
+    margin-right: .5em;
     padding: .2em;
     border-radius: .3em;
 }
 
-.content-button.reply.re-reply{
+/* .content-button.reply.re-reply{
     margin-right: .5em;
-}
+} */
 
 .content-button.submit-btn.info-second {
     margin-left:0;
