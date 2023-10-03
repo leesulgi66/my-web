@@ -179,6 +179,38 @@ let index = {
             alert(JSON.stringify(error));
         });
     },
+
+    replyDelete : function(boardId, replyId) {
+        if (!confirm("정말 댓글을 삭제할까요?")) {
+            return false;
+        } else {
+            $.ajax({
+                type:"DELETE",
+                url: `../api/board/${boardId}/reply/${replyId}`,
+                dataType: "json",
+                success: function (data) {
+                        console.log(data)
+                    },
+                error: function (request, status, error) {
+                    console.log("code: " + request.status)
+                    console.log("message: " + request.responseText)
+                    console.log("error: " + error);
+                }
+            }).done(function(resp){
+                console.log(resp);
+                if(resp.status == 500) {
+                    //alert(resp.data);
+                    alert("삭제가 실패했습니다.");
+                    location.href="/board/"+boardId;
+                }else {
+                    alert("삭제가 완료 되었습니다.");
+                    location.href="/board/"+boardId;
+                }
+            }).fail(function(error){
+                alert(JSON.stringify(error));
+             });
+        }
+    }
 }
 
 index.init();
