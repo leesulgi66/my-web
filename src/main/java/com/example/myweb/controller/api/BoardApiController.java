@@ -60,4 +60,11 @@ public class BoardApiController {
         boardService.replyToCommentSave(replyId, replyDto, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
+
+    @DeleteMapping("/api/board/{replyId}/reply/{replyToCommentId}")
+    public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId) {
+        log.info("BoardApiController : replyDelete 호출됨");
+        boardService.replyToCommentDelete(replyToCommentId);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
 }
