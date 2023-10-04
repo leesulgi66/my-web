@@ -73,6 +73,10 @@ public class BoardService {
         replyRepository.save(reply);
     }
 
+    public void replyDelete(Long replyId) {
+        replyRepository.deleteById(replyId);
+    }
+
     @Transactional
     public void replyToCommentSave(Long boardId, ReplyDto requestReply, User user) {
         Reply reply = replyRepository.findById(boardId).orElseThrow(()->{
@@ -87,7 +91,7 @@ public class BoardService {
         replyToCommentRepository.save(RTC);
     }
 
-    public void replyDelete(Long replyId) {
-        replyRepository.deleteById(replyId);
+    public void replyToCommentDelete(Long replyToCommentId) {
+        replyRepository.deleteById(replyToCommentId);
     }
 }
