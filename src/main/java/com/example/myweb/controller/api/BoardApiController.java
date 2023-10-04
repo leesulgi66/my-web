@@ -53,4 +53,11 @@ public class BoardApiController {
         boardService.replyDelete(replyId);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> replyToCommentSave(@PathVariable Long replyId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
+        log.info("BoardApiController : replySave 호출됨");
+        boardService.replyToCommentSave(replyId, replyDto, principal.getUser());
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
 }
