@@ -15,6 +15,12 @@ let index = {
         $("#btn-reply-save").on("click", ()=>{
             this.replySave();
         });
+
+        $("#btn-comment-save").on("click", ()=>{
+            this.commentSave();
+        });
+
+
     },
 
     save: function() {
@@ -210,7 +216,61 @@ let index = {
                 alert(JSON.stringify(error));
              });
         }
-    }
+    },
+
+    toggle : function(replyId) {
+        let replyTarget = "toggle--"+replyId
+          // 토글 할 버튼 선택 (btn1)
+          const target = document.getElementById(replyTarget);
+
+          // btn1 숨기기 (display: none)
+          if(target.style.display !== 'none') {
+            target.style.display = 'none';
+          }else {
+            target.style.display = "";
+          }
+    },
+
+    commentSave : function() {
+        let data = {
+            boardId : $("#id").text(),
+            replyId : $("#replyId").val(),
+            content : $("#comment-content").val()
+        }
+
+        if(data.content == "") {
+            alert("내용을 입력해 주세요");
+            return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url: `/api/reply/${data.replyId}/replyToComment`,
+            data: JSON.stringify(data),  // body date
+            contentType: "application/json; charset=utf-8", // dody data type(MIME)
+            dataType: "json", // reponse가 json 형식이라면 javascript로 변경해줌
+            success: function (data) {
+                    console.log(data)
+                },
+            error: function (request, status, error) {
+                console.log("code: " + request.status)
+                console.log("message: " + request.responseText)
+                console.log("error: " + error);
+            }
+        }).done(function(resp){
+            console.log(resp);
+            if(resp.status == 500) {
+                //alert(resp.data);
+                alert("댓글작성이 실패했습니다.");
+                location.href="/board/"+data.boardId;
+            }else {
+                //alert("댓글작성이 완료 되었습니다.");
+                location.href="/board/"+data.boardId;
+            }
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
 }
 
 index.init();
