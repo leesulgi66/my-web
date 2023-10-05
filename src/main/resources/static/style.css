@@ -225,7 +225,8 @@ input:focus {
     border-radius: .3em;
 }
 
-.form-control.reply {
+.form-control.reply,
+.form-control.re-reply {
     width: 80%;
     font-size: 1.2em;
     height: 2em;
@@ -233,12 +234,32 @@ input:focus {
     border:1px solid #ced4da;
     border-radius: .4em;
     margin: 1em;
-    border:1px solid #ced4da;
-    border-radius: .3em;
+}
+
+.form-control.re-reply{
+    margin: 0;
+    height: 1em;
+    resize: none;
 }
 
 .form-control.readonly {
     background-color: #cfcfcf;
+}
+
+.form-control .re-reply{
+    margin-left: 1em;
+}
+
+.comment-items.replyToComment {
+    background-color:#333;
+}
+
+.comment-items .name::before {
+    content: "┕"
+}
+
+.comment-items .comment-contents {
+    margin-left: 1em;
 }
 
 .board-ul {
