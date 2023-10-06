@@ -180,6 +180,12 @@ body{
     margin-left:0;
 }
 
+.comment .content-button.reply.delete,
+#comment-content,
+#btn-comment-save {
+    margin-top: .2em;
+}
+
 .reply-list {
     color:white;
 }
@@ -250,8 +256,10 @@ input:focus {
     margin-left: 1em;
 }
 
-.comment-items.replyToComment {
-    background-color:#333;
+.reply-box .reply-items .comment {
+    margin-top: .2em;
+    border-radius: .4em;
+    background-color:#656565;
 }
 
 .comment-items .name::before {
@@ -261,6 +269,8 @@ input:focus {
 .comment-items .comment-contents {
     margin-left: 1em;
 }
+
+.content-button
 
 .board-ul {
     text-align: center;
