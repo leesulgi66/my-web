@@ -48,23 +48,23 @@ public class BoardApiController {
     }
 
     @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
-    public ResponseDto<Integer> replyDelete(@PathVariable Long replyId) {
+    public ResponseDto<Integer> replyDelete(@PathVariable Long replyId, @AuthenticationPrincipal PrincipalDetail principal) {
         log.info("BoardApiController : replyDelete 호출됨");
         boardService.replyDelete(replyId);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
-    @PostMapping("/api/board/{boardId}/reply")
+    @PostMapping("/api/reply/{replyId}/replyToComment")
     public ResponseDto<Integer> replyToCommentSave(@PathVariable Long replyId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
-        log.info("BoardApiController : replySave 호출됨");
+        log.info("BoardApiController : replyToCommentSave 호출됨");
         boardService.replyToCommentSave(replyId, replyDto, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
-    @DeleteMapping("/api/board/{replyId}/reply/{replyToCommentId}")
-    public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId) {
-        log.info("BoardApiController : replyDelete 호출됨");
-        boardService.replyToCommentDelete(replyToCommentId);
+    @DeleteMapping("/api/reply/{replyId}/replyToComment/{replyToCommentId}")
+    public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId, @AuthenticationPrincipal PrincipalDetail principal) {
+        log.info("BoardApiController : replyToCommentDelete 호출됨");
+        boardService.replyToCommentDelete(replyToCommentId, principal);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
