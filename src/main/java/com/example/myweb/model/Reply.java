@@ -33,7 +33,7 @@ public class Reply {
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToMany(mappedBy = "reply", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "reply", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties({"reply"}) // 무한참조 방지
     @OrderBy("id desc")
     private List<ReplyToComment> comments;
