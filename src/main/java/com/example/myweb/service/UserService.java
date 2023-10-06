@@ -53,9 +53,9 @@ public class UserService {
         User delUser = userRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
         });
-        replyToCommentRepository.deleteAllByUserId(delUser.getId());
-        replyRepository.deleteAllByUserId(delUser.getId());
-        boardRepository.deleteAllByUserId(delUser.getId());
+//        replyToCommentRepository.deleteAllByUserId(delUser.getId());
+//        replyRepository.deleteAllByUserId(delUser.getId());
+//        boardRepository.deleteAllByUserId(delUser.getId());
         userRepository.delete(delUser);
     }
 }

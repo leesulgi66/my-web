@@ -1,5 +1,6 @@
 package com.example.myweb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -34,8 +36,13 @@ public class User {
 
     private String profileImage;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties({"user"}) // 무한참조 방지
+    @OrderBy("id desc")
+    private List<Board> boards;
+
     @Column(nullable = false, length = 10)
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING) // String값 자체를 저장
     private Role role;
 
     @CreationTimestamp
