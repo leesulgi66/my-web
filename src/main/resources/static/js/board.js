@@ -15,12 +15,6 @@ let index = {
         $("#btn-reply-save").on("click", ()=>{
             this.replySave();
         });
-
-        $("#btn-comment-save").on("click", ()=>{
-            this.commentSave();
-        });
-
-
     },
 
     save: function() {
@@ -231,13 +225,11 @@ let index = {
           }
     },
 
-    commentSave : function() {
+    commentSave : function(boardId ,replyId) {
         let data = {
-            boardId : $("#id").text(),
-            replyId : $("#replyId").val(),
-            content : $("#comment-content").val()
+            content : $("#comment-content" + replyId).val()
         }
-
+        console.log(data);
         if(data.content == "") {
             alert("내용을 입력해 주세요");
             return;
@@ -245,7 +237,7 @@ let index = {
 
         $.ajax({
             type:"POST",
-            url: `/api/reply/${data.replyId}/replyToComment`,
+            url: `/api/reply/${replyId}/replyToComment`,
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
             dataType: "json", // reponse가 json 형식이라면 javascript로 변경해줌
@@ -262,10 +254,10 @@ let index = {
             if(resp.status == 500) {
                 //alert(resp.data);
                 alert("댓글작성이 실패했습니다.");
-                location.href="/board/"+data.boardId;
+                location.href="/board/"+boardId;
             }else {
                 //alert("댓글작성이 완료 되었습니다.");
-                location.href="/board/"+data.boardId;
+                location.href="/board/"+boardId;
             }
         }).fail(function(error){
             alert(JSON.stringify(error));
