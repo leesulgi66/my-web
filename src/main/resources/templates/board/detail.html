@@ -43,19 +43,19 @@
                         <div th:text="${reply.user.username}" class="name">작성자</div>
                         <div th:text="${reply.content}" class="contents"></div>
 
-                        <ul>
-                            <div th:each="comment :${reply.comments}" >
-                                <li th:id="'comment--'+${comment.id}" class="comment-items clearfix replyToComment" >
-                                    <a th:if="${comment.user.id} == ${#authentication.principal.user.id}" th:onclick="index.commentDelete([[${reply.id}]], [[${comment.id}]])" class="content-button reply delete" >삭제</a>
-                                    <div th:text="${comment.user.username}" class="name">작성자</div>
-                                    <div th:text="${comment.content}" class="comment-contents"></div>
-                                </li>
-                            </div>
-                        </ul>
+                            <ul class="comment">
+                                <div th:each="comment :${reply.comments}" >
+                                    <li th:id="'comment--'+${comment.id}" class="comment-items clearfix replyToComment" >
+                                        <a th:if="${comment.user.id} == ${#authentication.principal.user.id}" th:onclick="index.commentDelete([[${board.id}]], [[${reply.id}]], [[${comment.id}]])" class="content-button reply delete" >삭제</a>
+                                        <div th:text="${comment.user.username}" class="name">작성자</div>
+                                        <div th:text="${comment.content}" class="comment-contents"></div>
+                                    </li>
+                                </div>
+                            </ul>
 
                         <div th:id="'toggle--'+${reply.id}" style="display:none">
-                            <textarea id="comment-content" class="form-control re-reply"></textarea>
-                            <a id="btn-comment-save" class="content-button reply re-reply" >대댓</a>
+                            <textarea th:id="'comment-content'+${reply.id}" class="form-control re-reply"></textarea>
+                            <a th:onclick="index.commentSave([[${board.id}]], [[${reply.id}]])" class="content-button reply re-reply" >대댓</a>
                         </div>
                     </li>
 
