@@ -5,11 +5,15 @@ import com.example.myweb.dto.ReplyDto;
 import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.model.Board;
 import com.example.myweb.service.BoardService;
+import com.example.myweb.service.S3Uploader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Slf4j
 @RestController
@@ -17,6 +21,9 @@ public class BoardApiController {
 
     @Autowired
     BoardService boardService;
+
+    @Autowired
+    S3Uploader s3Uploader;
 
     @PostMapping("/api/board")
     public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
@@ -66,5 +73,10 @@ public class BoardApiController {
         log.info("BoardApiController : replyToCommentDelete 호출됨");
         boardService.replyToCommentDelete(replyToCommentId, principal);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @PostMapping("/auth/board/upload")
+    public String upload(@RequestParam("data") MultipartFile multipartFile) throws IOException, IOException {
+        return s3Uploader.upload(multipartFile, "my-web");
     }
 }

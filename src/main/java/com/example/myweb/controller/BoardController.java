@@ -38,4 +38,9 @@ public class BoardController {
     public String saveForm() {
         return "/board/saveForm";
     }
+
+    @GetMapping("/auth/S3test")
+    public String S3test() {
+        return "S3test";
+    }
 }
