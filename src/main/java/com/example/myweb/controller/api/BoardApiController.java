@@ -75,8 +75,9 @@ public class BoardApiController {
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
-    @PostMapping("/auth/board/upload")
-    public String upload(@RequestParam("data") MultipartFile multipartFile) throws IOException, IOException {
+    @PostMapping("/api/board/imgUpload")
+    public String imgUpload(@RequestParam("data") MultipartFile multipartFile) throws IOException, IOException {
+        log.info("BoardApiController : imgUpload 호출됨");
         return s3Uploader.upload(multipartFile, "my-web");
     }
 }
