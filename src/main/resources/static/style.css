@@ -192,12 +192,12 @@ body{
     margin-top: .2em;
 }
 
-#profile-image {
+#btn-profile-image {
     margin-left: 0;
     margin-top: .3em;
 }
 
-#result-image {
+#result-profile-image {
     width: 5em;
     height: 5em;
 }
