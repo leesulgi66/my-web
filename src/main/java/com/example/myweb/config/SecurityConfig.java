@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/","/auth/**", "/js/**", "/css/**", "/images/**", "/**/*.css")
                 .permitAll()
+                .antMatchers("/api/board/imgUpload")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
