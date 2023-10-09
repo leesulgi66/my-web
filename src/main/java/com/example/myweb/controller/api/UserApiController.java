@@ -23,7 +23,7 @@ public class UserApiController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/auth/join")
-    public ResponseDto<Integer> save(@RequestBody User user) {
+    public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("UserApiController : save 호출됨");
         userService.save(user);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
@@ -37,9 +37,9 @@ public class UserApiController {
     }
 
     @DeleteMapping("/user/info")
-    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto) {
+    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto, @AuthenticationPrincipal PrincipalDetail principalDetail) {
         log.info("UserApiController : delete 호출됨");
-        userService.delete(userDeleteDto.getId());
+        userService.delete(userDeleteDto.getId(), principalDetail);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
