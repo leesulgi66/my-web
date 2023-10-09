@@ -36,11 +36,6 @@ public class User {
 
     private String profileImage;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"user"}) // 무한참조 방지
-    @OrderBy("id desc")
-    private List<Board> boards;
-
     @Column(nullable = false, length = 10)
     @Enumerated(value = EnumType.STRING) // String값 자체를 저장
     private Role role;

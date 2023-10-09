@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 
 @Service
 public class UserService {
@@ -40,6 +42,9 @@ public class UserService {
         User persistence = userRepository.findById(user.getId()).orElseThrow(()->{
             return new IllegalArgumentException("회원 찾기 실패");
         });
+        if(!Objects.equals(persistence.getUsername(), principal.getUsername())) {
+            throw new IllegalArgumentException("인증 실패");
+        }
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
         persistence.setPassword(encPassword);
@@ -49,13 +54,18 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id) {
+    public void delete(Long id, PrincipalDetail principal) {
         User delUser = userRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
         });
-//        replyToCommentRepository.deleteAllByUserId(delUser.getId());
-//        replyRepository.deleteAllByUserId(delUser.getId());
-//        boardRepository.deleteAllByUserId(delUser.getId());
+
+        if(!Objects.equals(delUser.getUsername(), principal.getUsername())) {
+            throw new IllegalArgumentException("인증 실패");
+        }
+
+        replyToCommentRepository.deleteAllByUserId(delUser.getId());
+        replyRepository.deleteAllByUserId(delUser.getId());
+        boardRepository.deleteAllByUserId(delUser.getId());
         userRepository.delete(delUser);
     }
 }
