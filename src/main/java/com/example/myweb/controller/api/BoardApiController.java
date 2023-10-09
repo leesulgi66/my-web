@@ -33,16 +33,16 @@ public class BoardApiController {
     }
 
     @DeleteMapping("/api/board/{id}")
-    public ResponseDto<Integer> delete(@PathVariable Long id) {
+    public ResponseDto<Integer> delete(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetail principal) {
         log.info("BoardApiController : delete 호출됨");
-        boardService.boardDelete(id);
+        boardService.boardDelete(id, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @PutMapping("/api/board/{id}")
-    public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board) {
+    public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
         log.info("BoardApiController : update 호출됨");
-        boardService.boardUpdate(id, board);
+        boardService.boardUpdate(id, board, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
 
     }
@@ -57,7 +57,7 @@ public class BoardApiController {
     @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
     public ResponseDto<Integer> replyDelete(@PathVariable Long replyId, @AuthenticationPrincipal PrincipalDetail principal) {
         log.info("BoardApiController : replyDelete 호출됨");
-        boardService.replyDelete(replyId);
+        boardService.replyDelete(replyId, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
@@ -71,7 +71,7 @@ public class BoardApiController {
     @DeleteMapping("/api/reply/{replyId}/replyToComment/{replyToCommentId}")
     public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId, @AuthenticationPrincipal PrincipalDetail principal) {
         log.info("BoardApiController : replyToCommentDelete 호출됨");
-        boardService.replyToCommentDelete(replyToCommentId, principal);
+        boardService.replyToCommentDelete(replyToCommentId, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
