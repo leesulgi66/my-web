@@ -20,7 +20,8 @@
                     <input type="hidden" id="id" th:value="${#authentication.principal.user.id}"/>
 
                     <div class="form-group profile-image">
-                        <img src="https://sulgibucket.s3.ap-northeast-2.amazonaws.com/my-web/noimage.png" id="result-profile-image">
+                        <input type="hidden" id="image-uri" value="https://sulgibucket.s3.ap-northeast-2.amazonaws.com/my-web/noimage.png">
+                        <img th:src="${#authentication.principal.user.profileImage}" id="result-profile-image">
                         <p class="image">profile-image</p>
                         <input type="file" id="profile-img">
                         <div>

@@ -35,6 +35,7 @@ let index = {
 
     save: function() {
         let data = {
+            profileImage : $("#image-uri").val(),
             username : $("#username").val(),
             nickname : $("#nickname").val(),
             password : $("#password").val(),
@@ -100,6 +101,7 @@ let index = {
 
     update: function() {
         let data = {
+            profileImage : $("#image-uri").val(),
             id: $("#id").val(),
             nickname : $("#nickname").val(),
             password : $("#password").val(),
@@ -218,6 +220,7 @@ let index = {
             contentType: false
         }).done(function (data) {
             $("#result-profile-image").attr("src", data);
+            $("#image-uri").val(data);
         }).fail(function (error) {
             alert(error);
         })
