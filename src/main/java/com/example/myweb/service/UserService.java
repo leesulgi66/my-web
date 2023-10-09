@@ -50,6 +50,7 @@ public class UserService {
         persistence.setPassword(encPassword);
         persistence.setNickname(user.getNickname());
         persistence.setEmail(user.getEmail());
+        persistence.setProfileImage(user.getProfileImage());
         principal.setUser(persistence);
     }
 
