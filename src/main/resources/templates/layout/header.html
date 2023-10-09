@@ -34,7 +34,7 @@
                 <!-- 로그인상태 메뉴-->
                 <div sec:authorize="isAuthenticated()">
                     <ul class="menu login in">
-                        <li><a id="info-text" href="/user/info">INFO</a></li>
+                        <li><a id="info-text" href="/user/info"><img href="/user/info" th:src="${#authentication.principal.user.profileImage}" id="menu-profile-image"></a></li>
                         <li><a id="logout-text" href="/logout">LOGOUT</a></li>
                     </ul>
                 </div>

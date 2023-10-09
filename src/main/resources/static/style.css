@@ -66,6 +66,10 @@ body{
     float: right;
 }
 
+.menu.login.in {
+    position: relative;
+}
+
 .menu li {
     float: left;
 }
@@ -199,7 +203,15 @@ body{
 
 #result-profile-image {
     width: 5em;
-    height: 5em;
+    border-radius: 50%;
+}
+
+#menu-profile-image {
+    width: 4em;
+    border-radius: 50%;
+    position:relative; 
+    top:50%; 
+    transform:translateY(-50%);
 }
 
 .reply-list {
