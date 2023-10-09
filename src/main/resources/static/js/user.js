@@ -209,9 +209,13 @@ let index = {
 
     imgUpload : function() {
         let file = $('#profile-img')[0].files[0];
+        let MaxSize = 5242880;
         let formData = new FormData();
         formData.append("data", file);
-
+        if(file.size > MaxSize) {
+            alert("용량이 너무 큽니다. 5MB 이하로 설정해 주세요.")
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: "/api/board/imgUpload",
@@ -222,7 +226,7 @@ let index = {
             $("#result-profile-image").attr("src", data);
             $("#image-uri").val(data);
         }).fail(function (error) {
-            alert(error);
+            alert(JSON.stringify(error));
         })
     },
 
