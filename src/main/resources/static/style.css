@@ -122,8 +122,18 @@ body{
 }
 
 .content .wrapper > .boards-title{
+    position: relative;
     border:1px solid #ced4da;
     border-radius: .4em; 
+}
+
+.content .wrapper > .boards-title > span{
+    float: right; 
+}
+
+.content .wrapper > .boards-title .board-username {
+    position: absolute;
+    right: 18%;
 }
 
 .board-write-form {
@@ -312,8 +322,6 @@ input:focus {
 .comment-items .comment-contents {
     margin-left: 1em;
 }
-
-.content-button
 
 .board-ul {
     text-align: center;

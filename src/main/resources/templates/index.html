@@ -16,6 +16,15 @@
             <div class="boards-title">
                 <a class="title-num" th:utext="${board.id}"></a>
                 <a class="title-h1" th:href="@{/board/{id}(id = ${board.id})}" th:text="${board.title}"></a>
+                <span>
+                    <span>🗨️</span>
+                    <span th:utext="${board.replies.size()}"></span>
+                </span>
+                <span>
+                    <span>🔼</span>
+                    <span th:utext="${board.count}"></span>
+                </span>
+                <span class="board-username" th:utext="${board.user.nickname}">작성자</span>
             </div>
             <!-- <a class="content-button" href=""> 상세 보기 </a> -->
         </div>
