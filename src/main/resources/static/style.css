@@ -13,6 +13,9 @@ a {
     text-decoration: none;
 }
 
+img {
+    vertical-align: unset;
+}
 /* Layouts */
 .wrapper {
     width: 1200px;
@@ -197,7 +200,7 @@ body{
 }
 
 .social-btn > img {
-    border-radius: .3em;
+    border-radius: 50%;
     margin-top: 1em;
     width: 2.05em;
     height: 2.05em;
