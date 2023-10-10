@@ -40,11 +40,14 @@ public class BoardService {
         return boardRepository.findAll(pageable);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Board boardDetail(Long id) {
-        return boardRepository.findById(id).orElseThrow(()->{
+         Board board = boardRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
-        });
+         });
+         long count = board.getCount();
+         board.setCount(count+1);
+        return board;
     }
 
     @Transactional
