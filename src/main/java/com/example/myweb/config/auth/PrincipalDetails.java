@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
-public class PrincipalDetail implements UserDetails {
+public class PrincipalDetails implements UserDetails {
     private User user;
 
     public User setUser(User user) {
         return this.user = user;
     }
 
-    public PrincipalDetail(User user) {
+    public PrincipalDetails(User user) {
         this.user = user;
     }
 

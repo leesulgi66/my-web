@@ -1,6 +1,6 @@
 package com.example.myweb.controller.api;
 
-import com.example.myweb.config.auth.PrincipalDetail;
+import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.dto.UserDeleteDto;
 import com.example.myweb.model.User;
@@ -23,23 +23,23 @@ public class UserApiController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/auth/join")
-    public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+    public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("UserApiController : save 호출됨");
         userService.save(user);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @PutMapping("/user/info")
-    public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+    public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("UserApiController : update 호출됨");
-        userService.update(user, principalDetail); // 업데이트된 유저 정보를 저장
+        userService.update(user, principalDetails); // 업데이트된 유저 정보를 저장
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @DeleteMapping("/user/info")
-    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto, @AuthenticationPrincipal PrincipalDetail principalDetail) {
+    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
         log.info("UserApiController : delete 호출됨");
-        userService.delete(userDeleteDto.getId(), principalDetail);
+        userService.delete(userDeleteDto.getId(), principalDetails);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }

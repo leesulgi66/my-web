@@ -1,6 +1,6 @@
 package com.example.myweb.config;
 
-import com.example.myweb.config.auth.PrincipalDetailService;
+import com.example.myweb.config.auth.PrincipalDetailsService;
 import com.example.myweb.config.auth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    private PrincipalDetailService principalDetailService;
+    private PrincipalDetailsService principalDetailsService;
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
 

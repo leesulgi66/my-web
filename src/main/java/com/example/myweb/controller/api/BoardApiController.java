@@ -1,6 +1,6 @@
 package com.example.myweb.controller.api;
 
-import com.example.myweb.config.auth.PrincipalDetail;
+import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.dto.ReplyDto;
 import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.model.Board;
@@ -26,21 +26,21 @@ public class BoardApiController {
     S3Uploader s3Uploader;
 
     @PostMapping("/api/board")
-    public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : save 호출됨");
         boardService.boardSave(board, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @DeleteMapping("/api/board/{id}")
-    public ResponseDto<Integer> delete(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> delete(@PathVariable Long id, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : delete 호출됨");
         boardService.boardDelete(id, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @PutMapping("/api/board/{id}")
-    public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : update 호출됨");
         boardService.boardUpdate(id, board, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
@@ -48,28 +48,28 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable Long boardId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> replySave(@PathVariable Long boardId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : replySave 호출됨");
         boardService.replySave(boardId, replyDto, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
-    public ResponseDto<Integer> replyDelete(@PathVariable Long replyId, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> replyDelete(@PathVariable Long replyId, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : replyDelete 호출됨");
         boardService.replyDelete(replyId, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @PostMapping("/api/reply/{replyId}/replyToComment")
-    public ResponseDto<Integer> replyToCommentSave(@PathVariable Long replyId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> replyToCommentSave(@PathVariable Long replyId, @RequestBody ReplyDto replyDto, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : replyToCommentSave 호출됨");
         boardService.replyToCommentSave(replyId, replyDto, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @DeleteMapping("/api/reply/{replyId}/replyToComment/{replyToCommentId}")
-    public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> replyToCommentDelete(@PathVariable Long replyToCommentId, @AuthenticationPrincipal PrincipalDetails principal) {
         log.info("BoardApiController : replyToCommentDelete 호출됨");
         boardService.replyToCommentDelete(replyToCommentId, principal.getUser());
         return new ResponseDto<>(HttpStatus.OK.value(), 1);

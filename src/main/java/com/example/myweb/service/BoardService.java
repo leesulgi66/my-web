@@ -1,6 +1,5 @@
 package com.example.myweb.service;
 
-import com.example.myweb.config.auth.PrincipalDetail;
 import com.example.myweb.dto.ReplyDto;
 import com.example.myweb.model.Board;
 import com.example.myweb.model.Reply;

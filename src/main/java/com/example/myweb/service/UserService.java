@@ -1,6 +1,6 @@
 package com.example.myweb.service;
 
-import com.example.myweb.config.auth.PrincipalDetail;
+import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
 import com.example.myweb.repository.ReplyRepository;
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     @Transactional
-    public void update(User user, PrincipalDetail principal) {
+    public void update(User user, PrincipalDetails principal) {
         User persistence = userRepository.findById(user.getId()).orElseThrow(()->{
             return new IllegalArgumentException("회원 찾기 실패");
         });
@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id, PrincipalDetail principal) {
+    public void delete(Long id, PrincipalDetails principal) {
         User delUser = userRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
         });

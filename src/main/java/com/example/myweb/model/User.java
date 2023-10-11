@@ -36,6 +36,10 @@ public class User {
 
     private String profileImage;
 
+    private String provider;
+
+    private String providerId;
+
     @Column(nullable = false, length = 10)
     @Enumerated(value = EnumType.STRING) // String값 자체를 저장
     private Role role;
