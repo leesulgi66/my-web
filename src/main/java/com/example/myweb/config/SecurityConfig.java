@@ -1,6 +1,7 @@
 package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailService;
+import com.example.myweb.config.auth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    PrincipalDetailService principalDetailService;
+    private PrincipalDetailService principalDetailService;
+    @Autowired
+    private PrincipalOauth2UserService principalOauth2UserService;
 
     @Bean
     BCryptPasswordEncoder encode() {
@@ -36,7 +39,12 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/auth/loginForm") // login page
                 .loginProcessingUrl("/auth/login")  // login 요청주소
-                .defaultSuccessUrl("/"); // login 성공시 이동주소
+                .defaultSuccessUrl("/") // login 성공시 이동주소
+                .and()
+                .oauth2Login()
+                .loginPage("/auth/login")
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
         return http.build();
     }
 }
