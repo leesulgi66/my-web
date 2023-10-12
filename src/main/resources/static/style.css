@@ -203,6 +203,10 @@ body{
     margin-left:0;
 }
 
+.content>.reply-list>.reply-box>.name {
+    border: 1px solid black;
+}
+
 .comment .content-button.reply.delete,
 #comment-content,
 #btn-comment-save {
@@ -227,7 +231,8 @@ body{
     border-radius: 50%;
 }
 
-#menu-profile-image {
+#menu-profile-image,
+#menu-profile-image-null {
     width: 4em;
     border-radius: 50%;
     position:relative; 

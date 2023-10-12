@@ -40,14 +40,14 @@
                     <li th:id="'reply--'+${reply.id}" class="reply-items clearfix">
                         <a class="content-button reply re-reply" th:onclick="index.toggle([[${reply.id}]])" >답글</a>
                         <a th:if="${reply.user.id} == ${#authentication.principal.user.id}" th:onclick="index.replyDelete([[${board.id}]], [[${reply.id}]])" class="content-button reply delete" >삭제</a>
-                        <div th:text="${reply.user.username}" class="name">작성자</div>
+                        <div th:text="${reply.user.nickname}" class="name">작성자</div>
                         <div th:text="${reply.content}" class="contents"></div>
 
                             <ul class="comment">
                                 <div th:each="comment :${reply.comments}" >
                                     <li th:id="'comment--'+${comment.id}" class="comment-items clearfix replyToComment" >
                                         <a th:if="${comment.user.id} == ${#authentication.principal.user.id}" th:onclick="index.commentDelete([[${board.id}]], [[${reply.id}]], [[${comment.id}]])" class="content-button reply delete" >삭제</a>
-                                        <div th:text="${comment.user.username}" class="name">작성자</div>
+                                        <div th:text="${comment.user.nickname}" class="name">작성자</div>
                                         <div th:text="${comment.content}" class="comment-contents"></div>
                                     </li>
                                 </div>
