@@ -1,6 +1,5 @@
 package com.example.myweb.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 12, unique = true)
+    @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -49,5 +47,17 @@ public class User {
 
     public enum Role {
         USER, MANAGER, ADMIN
+    }
+
+    public User(String username, String password, String email, String nickname, String profileImage, String provider, String providerId, Role role, Timestamp createDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.nickname = nickname;
+        this.profileImage = profileImage;
+        this.provider = provider;
+        this.providerId = providerId;
+        this.role = role;
+        this.createDate = createDate;
     }
 }
