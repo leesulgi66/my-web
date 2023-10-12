@@ -50,7 +50,7 @@ let index = {
             if(resp.status == 500) {
                 //alert(resp.data);
                 alert("글쓰기가 실패했습니다.");
-                location.href="/auth/joinForm";
+                location.href="/board/saveForm";
             }else {
                 alert("글쓰기가 완료 되었습니다.");
                 location.href="/";
