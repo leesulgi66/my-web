@@ -8,10 +8,12 @@ import com.example.myweb.repository.ReplyToCommentRepository;
 import com.example.myweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
+import java.util.Optional;
 
 
 @Service
@@ -35,6 +37,31 @@ public class UserService {
         user.setPassword(encPassword);
         user.setRole(User.Role.USER);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public User OauthUserSave(String provider, OAuth2User oAuth2User) {
+        String providerId = oAuth2User.getAttribute("sub");
+        String username = "social"+provider+"_"+providerId;
+        String nickname = oAuth2User.getAttribute("name");
+        String password = passwordEncoder.encode(provider+providerId);
+        String providerEmail = oAuth2User.getAttribute("email");
+        String providerProfileImage = oAuth2User.getAttribute("picture");
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isEmpty()) {
+            User OauthUser = User.builder()
+                .username(username)
+                .nickname(nickname)
+                .password(password)
+                .email(providerEmail)
+                .profileImage(providerProfileImage)
+                .role(User.Role.USER)
+                .build();
+            userRepository.save(OauthUser);
+            return OauthUser;
+        }else {
+            return user.get();
+        }
     }
 
     @Transactional
