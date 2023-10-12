@@ -4,14 +4,25 @@ import com.example.myweb.model.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 @Getter
-public class PrincipalDetails implements UserDetails {
-    private User user;
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
+    // 내가 추가한 User, OAuth2 attributes
+    private User user;
+    private Map<String, Object> attributes;
+
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
+        this.user = user;
+        this.attributes = attributes;
+    }
+
+    // UserDetails method
     public User setUser(User user) {
         return this.user = user;
     }
@@ -63,5 +74,21 @@ public class PrincipalDetails implements UserDetails {
         //람다 식으로도 가능
         //collectors.add(()-> { return "ROLE"+user.getRole();});
         return null;
+    }
+
+    // OAuth2User method
+    @Override
+    public <A> A getAttribute(String name) {
+        return OAuth2User.super.getAttribute(name);
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public String getName() {
+        return attributes.get("sub").toString();
     }
 }
