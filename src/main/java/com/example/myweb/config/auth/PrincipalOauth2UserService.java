@@ -1,6 +1,7 @@
 package com.example.myweb.config.auth;
 
 import com.example.myweb.config.oauth.GoogleUserInfo;
+import com.example.myweb.config.oauth.KakaoUserInfo;
 import com.example.myweb.config.oauth.NaverUserInfo;
 import com.example.myweb.config.oauth.OAuth2UserInfo;
 import com.example.myweb.model.User;
@@ -41,6 +42,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             oAuth2UserInfo = new NaverUserInfo((Map)(oAuth2User.getAttributes().get("response")));
         }else if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
             log.info("카카오 로그인 요청");
+            System.out.println((Map)(oAuth2User.getAttributes().get("properties")));
+            oAuth2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes().get("id").toString() , (Map)(oAuth2User.getAttributes().get("properties")),(Map)(oAuth2User.getAttributes().get("kakao_account")));
         }
 
         assert oAuth2UserInfo != null;
