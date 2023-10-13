@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/") // login 성공시 이동주소
                 .and()
                 .oauth2Login()
-                .loginPage("/auth/login")
+                .loginPage("/auth/loginForm")
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService);
         return http.build();
