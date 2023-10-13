@@ -1,21 +1,22 @@
 package com.example.myweb.service;
 
 import com.example.myweb.config.auth.PrincipalDetails;
+import com.example.myweb.config.oauth.OAuth2UserInfo;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
 import com.example.myweb.repository.ReplyRepository;
 import com.example.myweb.repository.ReplyToCommentRepository;
 import com.example.myweb.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
 
-
+@Slf4j
 @Service
 public class UserService {
 
@@ -40,21 +41,24 @@ public class UserService {
     }
 
     @Transactional
-    public User OauthUserSave(String provider, OAuth2User oAuth2User) {
-        String providerId = oAuth2User.getAttribute("sub");
-        String username = "social"+provider+"_"+providerId;
-        String nickname = oAuth2User.getAttribute("name");
+    public User OauthUserSave(OAuth2UserInfo oAuth2User) {
+        String provider = oAuth2User.getProvider();
+        String providerId = oAuth2User.getProviderId();
+        String username = "social_"+provider+"_"+providerId;
+        String nickname = oAuth2User.getNickname();
         String password = passwordEncoder.encode(provider+providerId);
-        String providerEmail = oAuth2User.getAttribute("email");
-        String providerProfileImage = oAuth2User.getAttribute("picture");
+        String providerEmail = oAuth2User.getEmail();
+        String providerProfileImage = oAuth2User.getProfileImage();
         Optional<User> user = userRepository.findByUsername(username);
         if(user.isEmpty()) {
+            log.info("자동 회원가입");
             User OauthUser = User.builder()
                 .username(username)
                 .nickname(nickname)
                 .password(password)
                 .email(providerEmail)
                 .profileImage(providerProfileImage)
+                .provider(provider)
                 .role(User.Role.USER)
                 .build();
             userRepository.save(OauthUser);
