@@ -2,7 +2,6 @@ package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailsService;
 import com.example.myweb.config.auth.PrincipalOauth2UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +29,8 @@ public class SecurityConfig {
                 .csrf().disable() //csrf() js로 들어오는 요청을 막아줌. (ajax 요청이 막히기 때문에 임시로 걸어둠)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //인증 처리 관점에서 세션을 생성하지 않음
                 .and()
-                .formLogin().disable()
-                .httpBasic().disable()
+                .formLogin().disable() // 기본 폼로그인 사용하지 않음
+                .httpBasic().disable() // 아이디와 비밀번호가 노출되는 basic방식 사용하지 않음
                 .apply(new MyCustomDsl()) // 커스텀 필터 등록
                 .and()
                 .authorizeRequests()
@@ -42,15 +41,15 @@ public class SecurityConfig {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin().disable();
+                .formLogin().disable()
 //                .loginPage("/auth/loginForm") // login page
 //                .loginProcessingUrl("/auth/login")  // login 요청주소
 //                .defaultSuccessUrl("/") // login 성공시 이동주소
 //                .and()
-//                .oauth2Login()
-//                .loginPage("/auth/loginForm")
-//                .userInfoEndpoint()
-//                .userService(principalOauth2UserService);
+                .oauth2Login()
+                .loginPage("/auth/loginForm")
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
         return http.build();
     }
 
