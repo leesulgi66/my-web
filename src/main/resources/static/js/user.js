@@ -8,8 +8,8 @@ let index = {
             this.update();
         });
 
-        $("#login-button").on("click", ()=>{
-            this.chk_form();
+        $("#btn-login").on("click", ()=>{
+            this.login();
         });
 
         $("#btn-delete").on("click", ()=>{
@@ -29,6 +29,12 @@ let index = {
         $("#email-update").on("keydown", (key)=>{
             if(key.keyCode==13) {
                 this.update();
+            }
+        });
+
+        $("#password").on("keydown", (key)=>{
+            if(key.keyCode==13) {
+                this.login();
             }
         });
     },
@@ -230,16 +236,50 @@ let index = {
         })
     },
 
-    chk_form : function() {
-        if(document.getElementById("username").value==''){
-        	alert("아이디를 입력해주십시오.");
-        	return false;
+    login: function() {
+        let data = {
+            username : $("#username").val(),
+            password : $("#password").val(),
         }
-        if(document.getElementById("password").value==''){
-        	alert("비밀번호를 입력해주십시오.");
-        	return false;
+
+        if(data.username == "") {
+            alert("아이디를 입력해 주세요");
+            return;
         }
-        document.getElementById('frm').submit();
+        if(data.password == "") {
+            alert("비밀번호를 입력해 주세요");
+            return;
+        }
+
+        $.ajax({
+            type:"POST",
+            url: "/login",
+            data: JSON.stringify(data),  // body date
+            contentType: "application/json; charset=utf-8", // dody data type(MIME)
+            dataType: "json", // reponse가 json 형식이라면 javascript로 변경해줌
+            success: function (data) {
+                    console.log(data)
+                },
+            error: function (request, status, error) {
+                console.log("code: " + request.status)
+                console.log("message: " + request.responseText)
+                console.log("error: " + error);
+            }
+        }).done(function(resp){
+            console.log(resp);
+            if(resp.status == 500) {
+                //alert(resp.data);
+                alert("로그인에 실패했습니다.");
+                location.href="/auth/joinForm";
+            }else {
+                alert("로그인이 완료 되었습니다.");
+                location.href="/";
+            }
+
+        }).fail(function(error){
+            alert(error);
+            alert(JSON.stringify(error));
+        });
     },
 }
 
