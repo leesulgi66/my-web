@@ -16,7 +16,7 @@
     <div class="content">
         <div class="wrapper clearfix">
             <div>
-                <form id="frm" action="/auth/login" method="post">
+                <form>
                     <div class="form-group">
                         <label for="username">username</label>
                         <input type="text" name="username" class="form-control" placeholder="아이디를 입력하세요" id="username">
@@ -24,9 +24,9 @@
 
                     <div class="form-group">
                         <label for="username">password</label>
-                        <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password" onkeyup="enterkey()">
+                        <input type="password" name="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password">
                     </div>
-                    <a id="login-button" class="content-button submit-btn"> 로그인 </a>
+                    <a id="btn-login" class="content-button submit-btn"> 로그인 </a>
                     <a href="/oauth2/authorization/kakao" class="social-btn"> <img src="/images/social-img-kakao.png"> </a>
                     <a href="/oauth2/authorization/naver" class="social-btn"> <img src="/images/social-img-naver.png"> </a>
                     <a href="/oauth2/authorization/google" class="social-btn"> <img src="/images/social-img-google.png"> </a>
@@ -35,22 +35,22 @@
         </div>
     </div>
 
-    <script>
-        function enterkey() {
-            if (window.event.keyCode == 13) {
-                if(document.getElementById("username").value==''){
-                    alert("아이디를 입력해주십시오.");
-                    return false;
-                }
-                if(document.getElementById("password").value==''){
-                    alert("비밀번호를 입력해주십시오.");
-                    return false;
-                }else {
-                frm.submit();
-                }
-            }
-        }
-    </script>
+<!--    <script>-->
+<!--        function enterkey() {-->
+<!--            if (window.event.keyCode == 13) {-->
+<!--                if(document.getElementById("username").value==''){-->
+<!--                    alert("아이디를 입력해주십시오.");-->
+<!--                    return false;-->
+<!--                }-->
+<!--                if(document.getElementById("password").value==''){-->
+<!--                    alert("비밀번호를 입력해주십시오.");-->
+<!--                    return false;-->
+<!--                }else {-->
+<!--                frm.submit();-->
+<!--                }-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
 
     <script src="/js/user.js"></script>
     <div th:insert="~{/layout/footer :: footer}"></div>
