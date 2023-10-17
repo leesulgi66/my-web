@@ -37,12 +37,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         // header token check
         if(jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
             chain.doFilter(request, response);
+            return;
         }
 
         // Jwt Authorization check
         String jwtToken = request.getHeader("Authorization").replace("Bearer ", "");
 
-        String tokenValue = JWT.require(Algorithm.HMAC512("secret")).build().verify(jwtToken).toString();
         String userId = JWT.require(Algorithm.HMAC512("secret")).build().verify(jwtToken).getClaim("id").toString();
         logger.info("user id : "+userId);
 
