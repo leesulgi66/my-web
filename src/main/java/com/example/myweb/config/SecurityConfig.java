@@ -3,6 +3,8 @@ package com.example.myweb.config;
 import com.example.myweb.config.auth.PrincipalDetailsService;
 import com.example.myweb.config.auth.PrincipalOauth2UserService;
 import com.example.myweb.config.jwt.JwtAuthenticationFilter;
+import com.example.myweb.config.jwt.JwtAuthorizationFilter;
+import com.example.myweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,8 @@ public class SecurityConfig {
     private PrincipalOauth2UserService principalOauth2UserService;
     @Autowired
     private CorsConfig corsConfig;
+    @Autowired
+    private UserService userService;
 
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -39,8 +43,10 @@ public class SecurityConfig {
                 .permitAll()
                 .antMatchers("/api/board/imgUpload")
                 .permitAll()
+                .antMatchers("/board/**")
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .anyRequest()
-                .authenticated()
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .and()
                 .formLogin().disable()
 //                .loginPage("/auth/loginForm") // login page
@@ -60,7 +66,8 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http
                     .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager));
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
+                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userService));
         }
     }
 }
