@@ -266,8 +266,10 @@ let index = {
                 console.log("error: " + error);
             }
         }).done(function(resp){
-            console.log(resp);
-            if(resp.status == 500) {
+
+        }).fail(function(error){
+            console.log(error);
+            if(error.status == 500) {
                 //alert(resp.data);
                 alert("로그인에 실패했습니다.");
                 location.href="/auth/joinForm";
@@ -275,10 +277,6 @@ let index = {
                 alert("로그인이 완료 되었습니다.");
                 location.href="/";
             }
-
-        }).fail(function(error){
-            alert(error);
-            alert(JSON.stringify(error));
         });
     },
 }
