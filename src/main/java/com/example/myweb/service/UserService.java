@@ -32,6 +32,15 @@ public class UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
+    public User findUser(long id) {
+        User user = userRepository.findById(id).orElseThrow(()->{
+            throw new IllegalArgumentException("회원 찾기 실패 : 찾는 아이디가 없습니다.");
+        });
+
+        return user;
+    }
+
+    @Transactional
     public void save(User user) {
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
@@ -71,7 +80,7 @@ public class UserService {
     @Transactional
     public void update(User user, PrincipalDetails principal) {
         User persistence = userRepository.findById(user.getId()).orElseThrow(()->{
-            return new IllegalArgumentException("회원 찾기 실패");
+            return new IllegalArgumentException("회원 찾기 실패 : 찾는 아이디가 없습니다.");
         });
         if(!Objects.equals(persistence.getUsername(), principal.getUsername())) {
             throw new IllegalArgumentException("인증 실패");
