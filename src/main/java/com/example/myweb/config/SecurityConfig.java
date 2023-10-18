@@ -2,8 +2,6 @@ package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailsService;
 import com.example.myweb.config.auth.PrincipalOauth2UserService;
-import com.example.myweb.config.jwt.JwtAuthenticationFilter;
-import com.example.myweb.config.jwt.JwtAuthorizationFilter;
 import com.example.myweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -39,24 +37,23 @@ public class SecurityConfig {
                 .apply(new MyCustomDsl()) // 커스텀 필터 등록
                 .and()
                 .authorizeRequests()
-                .antMatchers("/","/auth/**", "/js/**", "/css/**", "/images/**", "/**/*.css")
-                .permitAll()
-                .antMatchers("/api/board/imgUpload")
-                .permitAll()
+//                .antMatchers("/","/auth/**", "/js/**", "/css/**", "/images/**", "/**/*.css")
+//                .permitAll()
                 .antMatchers("/board/**")
-                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .authenticated()
                 .anyRequest()
-                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+                .permitAll()
+//                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .and()
-                .formLogin().disable()
+                .formLogin().disable();
 //                .loginPage("/auth/loginForm") // login page
 //                .loginProcessingUrl("/auth/login")  // login 요청주소
 //                .defaultSuccessUrl("/") // login 성공시 이동주소
 //                .and()
-                .oauth2Login()
-                .loginPage("/auth/loginForm")
-                .userInfoEndpoint()
-                .userService(principalOauth2UserService);
+//                .oauth2Login()
+//                .loginPage("/auth/loginForm")
+//                .userInfoEndpoint()
+//                .userService(principalOauth2UserService);
         return http.build();
     }
 
@@ -65,9 +62,9 @@ public class SecurityConfig {
         public void configure(HttpSecurity http) throws Exception {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http
-                    .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
-                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userService));
+                    .addFilter(corsConfig.corsFilter());
+//                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
+//                    .addFilter(new JwtAuthorizationFilter(authenticationManager, userService));
         }
     }
 }
