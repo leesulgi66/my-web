@@ -2,11 +2,16 @@ package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailsService;
 import com.example.myweb.config.auth.PrincipalOauth2UserService;
+import com.example.myweb.config.jwt.JwtAccessDeniedHandler;
+import com.example.myweb.config.jwt.JwtAuthenticationEntryPoint;
+import com.example.myweb.config.jwt.JwtSecurityConfig;
+import com.example.myweb.config.jwt.TokenProvider;
 import com.example.myweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -15,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     @Autowired
@@ -25,6 +31,12 @@ public class SecurityConfig {
     private CorsConfig corsConfig;
     @Autowired
     private UserService userService;
+    @Autowired
+    private TokenProvider tokenProvider;
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @Autowired
+    private JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
@@ -35,6 +47,8 @@ public class SecurityConfig {
                 .formLogin().disable() // 기본 폼로그인 사용하지 않음 -> 때문에 기본적인 UsernamePasswordAuthenticationFilter가 작동을 하지 않음. 새로운 필터를 등록해야 함.
                 .httpBasic().disable() // 아이디와 비밀번호가 노출되는 basic방식 사용하지 않음
                 .apply(new MyCustomDsl()) // 커스텀 필터 등록
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider))
                 .and()
                 .authorizeRequests()
 //                .antMatchers("/","/auth/**", "/js/**", "/css/**", "/images/**", "/**/*.css")
