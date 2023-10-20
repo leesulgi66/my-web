@@ -41,6 +41,15 @@ public class UserService {
     }
 
     @Transactional
+    public User findUser(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(()->{
+            throw new IllegalArgumentException("회원 찾기 실패 : 찾는 아이디가 없습니다.");
+        });
+
+        return user;
+    }
+
+    @Transactional
     public void save(User user) {
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
