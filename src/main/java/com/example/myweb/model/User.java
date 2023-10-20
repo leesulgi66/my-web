@@ -38,6 +38,9 @@ public class User {
 
     private String providerId;
 
+    @Column(name = "activated")
+    private boolean activated;
+
     @Column(nullable = false, length = 10)
     @Enumerated(value = EnumType.STRING) // String값 자체를 저장
     private Role role;
