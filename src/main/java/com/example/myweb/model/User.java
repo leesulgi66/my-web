@@ -49,7 +49,7 @@ public class User {
     private Timestamp createDate;
 
     public enum Role {
-        USER, MANAGER, ADMIN
+        ROLE_USER, ROLE_MANAGER, ROLE_ADMIN
     }
 
     public User(String username, String password, String email, String nickname, String profileImage, String provider, String providerId, Role role, Timestamp createDate) {

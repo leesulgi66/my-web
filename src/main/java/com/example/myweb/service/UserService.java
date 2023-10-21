@@ -54,7 +54,7 @@ public class UserService {
         String rawPassword = user.getPassword();
         String encPassword = passwordEncoder.encode(rawPassword);
         user.setPassword(encPassword);
-        user.setRole(User.Role.USER);
+        user.setRole(User.Role.ROLE_USER);
         userRepository.save(user);
     }
 
@@ -77,7 +77,7 @@ public class UserService {
                 .email(providerEmail)
                 .profileImage(providerProfileImage)
                 .provider(provider)
-                .role(User.Role.USER)
+                .role(User.Role.ROLE_USER)
                 .build();
             userRepository.save(OauthUser);
             return OauthUser;
