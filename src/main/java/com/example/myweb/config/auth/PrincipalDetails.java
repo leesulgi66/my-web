@@ -23,8 +23,8 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     // UserDetails method
-    public User setUser(User user) {
-        return this.user = user;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public PrincipalDetails(User user) {
@@ -68,7 +68,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         collectors.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "ROLE_"+user.getRole(); // spring 규칙!  -> ROLE_USER, ROLE_ADMIN
+                return String.valueOf(user.getRole()); // spring 규칙!  -> ROLE_USER, ROLE_ADMIN
             }
         });
         //람다 식으로도 가능
