@@ -1,5 +1,6 @@
 package com.example.myweb.config.jwt;
 
+import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.model.User;
 import com.example.myweb.service.UserService;
 import io.jsonwebtoken.*;
@@ -45,18 +46,17 @@ public class TokenProvider implements InitializingBean {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createToken(Authentication authentication, long id){
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
+    public String createToken(Authentication authentication, PrincipalDetails principalDetails){
+        long userId = principalDetails.getUser().getId();
+        String userAuthority = principalDetails.getUser().getRole().toString();
 
         long now = (new Date().getTime());
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
         return Jwts.builder()
                 .setSubject(authentication.getName())
-                .claim(AUTHORITIES_KEY, authorities)
-                .claim("id", id)
+                .claim(AUTHORITIES_KEY, userAuthority)
+                .claim("id", userId)
                 .signWith(key, SignatureAlgorithm.HS512)
                 .setExpiration(validity)
                 .compact();
@@ -75,7 +75,8 @@ public class TokenProvider implements InitializingBean {
                         .map(SimpleGrantedAuthority::new)
                         .collect(Collectors.toList());
 
-        long userId = Long.parseLong(claims.getId());
+        long userId = Long.parseLong(claims.get("id").toString());
+
         User principalUser = userService.findUser(userId);
 
         return new UsernamePasswordAuthenticationToken(principalUser, token, authorities);
@@ -89,6 +90,7 @@ public class TokenProvider implements InitializingBean {
         } catch (io.jsonwebtoken.security.SignatureException | MalformedJwtException e) {
             log.info("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e ){
+            log.info("만료된 JWT 서명입니다.");
             return JwtCode.EXPIRED;
         } catch (UnsupportedJwtException e ){
             log.info("지원되지 않는 JWT 토큰입니다.");
