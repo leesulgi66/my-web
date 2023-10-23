@@ -18,21 +18,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/api")
-public class AuthController {
+public class LoginAuthController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final UserService userService;
 
-    public AuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserService userService) {
+    public LoginAuthController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserService userService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userService = userService;
     }
 
     @PostMapping("authenticate")
-    public ResponseEntity<TokenDto> authorize(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<TokenDto> authorize(@RequestBody LoginDto loginDto, HttpServletResponse res) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
@@ -44,6 +47,11 @@ public class AuthController {
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer "+jwt);
+        Cookie cookie = new Cookie(JwtFilter.AUTHORIZATION_HEADER, jwt);
+        cookie.setPath("/");
+        cookie.setMaxAge(5*(1000*60));
+
+        res.addCookie(cookie);
 
         return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
     }
