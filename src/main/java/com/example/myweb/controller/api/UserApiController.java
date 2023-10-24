@@ -8,6 +8,7 @@ import com.example.myweb.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,11 @@ public class UserApiController {
     }
 
     @PutMapping("/user/info")
-    public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseDto<Integer> update(@RequestBody User user, Authentication authentication) {
         log.info("UserApiController : update 호출됨");
-        userService.update(user, principalDetails); // 업데이트된 유저 정보를 저장
+        User principalUser = (User) authentication.getPrincipal();
+
+        userService.update(user, principalUser); // 업데이트된 유저 정보를 저장
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
