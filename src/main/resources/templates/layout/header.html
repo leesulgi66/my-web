@@ -33,19 +33,17 @@
                 <div sec:authorize="isAuthenticated()">
                     <ul class="menu login in">
                         <li><a id="info-text" href="/user/info"><img th:src="${#authentication.principal.profileImage}" id="menu-profile-image"></a></li>
-                        <li><a id="btn-logout">LOGOUT</a></li>
+                        <li><a id="btn-logout" onclick="logout()">LOGOUT</a></li>
                     </ul>
                 </div>
             </div>
         </div>
+        <script>
+            let logout = function() {
+                document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                location.href="/";
+            }
+        </script>
     </header>
-<script>
-    const button = document.querySelector('#btn-logout');
-    const buttonClickHandler = () =>{
-      alert('Button clicked!');
-    };
-
-    button.addEventListener('click',buttonClickHandler);
-</script>
 </body>
 </html>
