@@ -87,7 +87,7 @@ public class UserService {
     }
 
     @Transactional
-    public void update(User user, PrincipalDetails principal) {
+    public void update(User user, User principal) {
         User persistence = userRepository.findById(user.getId()).orElseThrow(()->{
             return new IllegalArgumentException("회원 찾기 실패 : 찾는 아이디가 없습니다.");
         });
@@ -100,7 +100,11 @@ public class UserService {
         persistence.setNickname(user.getNickname());
         persistence.setEmail(user.getEmail());
         persistence.setProfileImage(user.getProfileImage());
-        principal.setUser(persistence);
+
+        principal.setPassword(encPassword);
+        principal.setNickname(user.getNickname());
+        principal.setEmail(user.getEmail());
+        principal.setProfileImage(user.getProfileImage());
     }
 
     @Transactional
