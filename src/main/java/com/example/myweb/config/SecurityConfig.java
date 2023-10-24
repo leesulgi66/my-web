@@ -1,7 +1,6 @@
 package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailsService;
-import com.example.myweb.config.auth.PrincipalOauth2UserService;
 import com.example.myweb.config.jwt.JwtAccessDeniedHandler;
 import com.example.myweb.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.myweb.config.jwt.JwtSecurityConfig;
@@ -25,8 +24,6 @@ public class SecurityConfig {
 
     @Autowired
     private PrincipalDetailsService principalDetailsService;
-    @Autowired
-    private PrincipalOauth2UserService principalOauth2UserService;
     @Autowired
     private CorsConfig corsConfig;
     @Autowired
@@ -55,6 +52,8 @@ public class SecurityConfig {
 //                .permitAll()
                 .antMatchers("/board/**")
                 .authenticated()
+                .antMatchers("/test/**")
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .anyRequest()
                 .permitAll()
 //                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
