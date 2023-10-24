@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <textarea th:text="${board.content}" class="form-control summernote" rows="5" id="content"></textarea>
                 </div>
-                <a id="board-update" class="content-button submit-btn" style="color: white;"> 글수정 완료 </a>
+                <a th:if="${board.user.id} == ${#authentication.principal.id}" id="board-update" class="content-button submit-btn" style="color: white;"> 글수정 완료 </a>
             </form>
         </div>
     </div>

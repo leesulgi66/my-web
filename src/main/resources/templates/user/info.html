@@ -17,11 +17,12 @@
         <div class="wrapper clearfix">
             <div>
                 <form action="/action_page.php">
-                    <input type="hidden" id="id" th:value="${#authentication.principal.user.id}"/>
+                    <input type="hidden" id="id" th:value="${#authentication.principal.id}"/>
 
                     <div class="form-group profile-image">
                         <input type="hidden" id="image-uri" value="https://sulgibucket.s3.ap-northeast-2.amazonaws.com/my-web/noimage.png">
-                        <img th:src="${#authentication.principal.user.profileImage}" id="result-profile-image">
+                        <input type="hidden" id="image-uri-auth" th:value="${#authentication.principal.profileImage}">
+                        <img th:src="${#authentication.principal.profileImage}" id="result-profile-image">
                         <p class="image">profile-image</p>
                         <input type="file" id="profile-img">
                         <div>
@@ -30,11 +31,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="username">username</label> <input th:value="${#authentication.principal.user.username}" type="text" class="form-control readonly" id="username" readonly>
+                        <label for="username">username</label> <input th:value="${#authentication.principal.username}" type="text" class="form-control readonly" id="username" readonly>
                     </div>
 
                     <div class="form-group">
-                        <label for="username">nickname</label> <input th:value="${#authentication.principal.user.nickname}" type="text" class="form-control" placeholder="닉네임을 입력하세요" id="nickname">
+                        <label for="username">nickname</label> <input th:value="${#authentication.principal.nickname}" type="text" class="form-control" placeholder="닉네임을 입력하세요" id="nickname">
                     </div>
 
                     <div class="form-group">
@@ -46,7 +47,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="username">email</label> <input th:value="${#authentication.principal.user.email}" type="email" class="form-control" placeholder="이메일을 입력하세요" id="email-update">
+                        <label for="username">email</label> <input th:value="${#authentication.principal.email}" type="email" class="form-control" placeholder="이메일을 입력하세요" id="email-update">
                     </div>
 
                 </form>

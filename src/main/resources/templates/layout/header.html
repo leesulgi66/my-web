@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <!-- jQuery Library -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-
 </head>
 <body>
     <!-- 조각화 th:fragment="조각명" -->
@@ -34,12 +32,20 @@
                 <!-- 로그인상태 메뉴-->
                 <div sec:authorize="isAuthenticated()">
                     <ul class="menu login in">
-                        <li><a id="info-text" href="/user/info"><img th:if="${not #authentication.principal.user.profileImage.isEmpty()}" th:src="${#authentication.principal.user.profileImage}" id="menu-profile-image"></a></li>
-                        <li><a id="logout-text" href="/logout">LOGOUT</a></li>
+                        <li><a id="info-text" href="/user/info"><img th:src="${#authentication.principal.profileImage}" id="menu-profile-image"></a></li>
+                        <li><a id="btn-logout">LOGOUT</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
+<script>
+    const button = document.querySelector('#btn-logout');
+    const buttonClickHandler = () =>{
+      alert('Button clicked!');
+    };
+
+    button.addEventListener('click',buttonClickHandler);
+</script>
 </body>
 </html>
