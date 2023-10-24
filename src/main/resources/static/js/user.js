@@ -107,7 +107,7 @@ let index = {
 
     update: function() {
         let data = {
-            profileImage : $("#image-uri").val(),
+            profileImage : $("#image-uri-auth").val(),
             id: $("#id").val(),
             nickname : $("#nickname").val(),
             password : $("#password").val(),
@@ -253,7 +253,7 @@ let index = {
 
         $.ajax({
             type:"POST",
-            url: "/login",
+            url: "/api/authenticate",
             data: JSON.stringify(data),  // body date
             contentType: "application/json; charset=utf-8", // dody data type(MIME)
             dataType: "json", // reponse가 json 형식이라면 javascript로 변경해줌
@@ -266,7 +266,9 @@ let index = {
                 console.log("error: " + error);
             }
         }).done(function(resp){
-
+            location.href="/";
+            let value = document.cookie.match('(^|;) ?' + "Authorization" + '=([^;]*)(;|$)');
+            console.log("cookie = "+value);
         }).fail(function(error){
             console.log(error);
             if(error.status == 500) {
