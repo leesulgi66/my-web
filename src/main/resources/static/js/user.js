@@ -203,8 +203,9 @@ let index = {
                 alert("회원 탈퇴에 실패했습니다.");
                 location.href="/user/info";
             }else {
+                document.cookie = "Authorization=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 alert("회원 탈퇴에 완료 되었습니다.");
-                location.href="/logout";
+                location.href="/";
             }
 
         }).fail(function(error){
@@ -266,19 +267,18 @@ let index = {
                 console.log("error: " + error);
             }
         }).done(function(resp){
+
+        if(resp.status == 500) {
+            alert("로그인에 실패했습니다.");
+            alert(resp.data);
+            location.href="/auth/loginForm";
+        }else {
             location.href="/";
             let value = document.cookie.match('(^|;) ?' + "Authorization" + '=([^;]*)(;|$)');
             console.log("cookie = "+value);
+        }
         }).fail(function(error){
             console.log(error);
-            if(error.status == 500) {
-                //alert(resp.data);
-                alert("로그인에 실패했습니다.");
-                location.href="/auth/joinForm";
-            }else {
-                alert("로그인이 완료 되었습니다.");
-                location.href="/";
-            }
         });
     },
 }
