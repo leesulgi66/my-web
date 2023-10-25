@@ -24,7 +24,7 @@ public class UserApiController {
     private BCryptPasswordEncoder passwordEncoder;
 
     @PostMapping("/auth/join")
-    public ResponseDto<Integer> save(@RequestBody User user, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseDto<Integer> save(@RequestBody User user) {
         log.info("UserApiController : save 호출됨");
         userService.save(user);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
