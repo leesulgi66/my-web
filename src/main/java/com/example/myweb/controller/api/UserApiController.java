@@ -31,18 +31,18 @@ public class UserApiController {
     }
 
     @PutMapping("/user/info")
-    public ResponseDto<Integer> update(@RequestBody User user, Authentication authentication) {
+    public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal User authentication) {
         log.info("UserApiController : update 호출됨");
-        User principalUser = (User) authentication.getPrincipal();
 
-        userService.update(user, principalUser); // 업데이트된 유저 정보를 저장
+        userService.update(user, authentication); // 업데이트된 유저 정보를 저장
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 
     @DeleteMapping("/user/info")
-    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+    public ResponseDto<Integer> delete(@RequestBody UserDeleteDto userDeleteDto,  Authentication authentication) {
         log.info("UserApiController : delete 호출됨");
-        userService.delete(userDeleteDto.getId(), principalDetails);
+        User principalUser = (User) authentication.getPrincipal();
+        userService.delete(userDeleteDto.getId(), principalUser);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
