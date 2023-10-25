@@ -1,6 +1,5 @@
 package com.example.myweb.service;
 
-import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.config.oauth.OAuth2UserInfo;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
@@ -108,7 +107,7 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id, PrincipalDetails principal) {
+    public void delete(Long id, User principal) {
         User delUser = userRepository.findById(id).orElseThrow(()->{
             return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
         });
