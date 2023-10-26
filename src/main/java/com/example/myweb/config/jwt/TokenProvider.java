@@ -59,6 +59,22 @@ public class TokenProvider implements InitializingBean {
                 .compact();
     }
 
+    public String createToken(User principalDetails){
+        long userId = principalDetails.getId();
+        String userAuthority = principalDetails.getRole().toString();
+
+        long now = (new Date().getTime());
+        Date validity = new Date(now + this.tokenValidityInMilliseconds);
+
+        return Jwts.builder()
+                .setSubject("refresh")
+                .claim(AUTHORITIES_KEY, userAuthority)
+                .claim("id", userId)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .setExpiration(validity)
+                .compact();
+    }
+
     public String createRefreshToken(PrincipalDetails principalDetails){
         long userId = principalDetails.getUser().getId();
         String userAuthority = principalDetails.getUser().getRole().toString();
