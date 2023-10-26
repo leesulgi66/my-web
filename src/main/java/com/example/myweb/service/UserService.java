@@ -121,4 +121,13 @@ public class UserService {
         boardRepository.deleteAllByUserId(delUser.getId());
         userRepository.delete(delUser);
     }
+
+    @Transactional
+    public void refreshSave(long userId, String refresh) {
+        User user = userRepository.findById(userId).orElseThrow(()->{
+            return new IllegalArgumentException("회원 탈퇴 실패 : 찾는 아이디가 없습니다.");
+        });
+
+        user.setRefresh(refresh);
+    }
 }
