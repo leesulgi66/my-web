@@ -15,10 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -62,6 +59,22 @@ public class TokenProvider implements InitializingBean {
                 .compact();
     }
 
+    public String createRefreshToken(PrincipalDetails principalDetails){
+        long userId = principalDetails.getUser().getId();
+        String userAuthority = principalDetails.getUser().getRole().toString();
+
+        long now = (new Date().getTime());
+        Date validity = new Date((now+this.tokenValidityInMilliseconds)*10);
+
+        return Jwts.builder()
+                .setSubject("RefreshToken")
+                .claim(AUTHORITIES_KEY, userAuthority)
+                .claim("id", userId)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .setExpiration(validity)
+                .compact();
+    }
+
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts
                 .parserBuilder()
@@ -98,6 +111,19 @@ public class TokenProvider implements InitializingBean {
             log.info("JWT 토큰이 잘못되었습니다.");
         }
         return JwtCode.DENIED;
+    }
+
+    public String getRefresh(String token) {
+        Base64.Decoder decoder = Base64.getDecoder();
+        String[] jwtPayload = token.split("\\.");
+        byte[] decodedBytes = decoder.decode(jwtPayload[1].getBytes());
+        String tokenString = new String(decodedBytes);
+
+        long id = Long.parseLong(tokenString.split(",")[2].split(":")[1].replace("\"",""));
+
+        String refresh = userService.findUser(id).getRefresh();
+
+        return refresh;
     }
 
     public static enum JwtCode{
