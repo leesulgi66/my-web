@@ -38,6 +38,8 @@ public class User {
 
     private String providerId;
 
+    private String refresh;
+
     @Column(name = "activated")
     private boolean activated;
 
