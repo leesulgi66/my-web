@@ -42,14 +42,18 @@ public class LoginAuthController {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
-
+        //jwt token
         String jwt = tokenProvider.createToken(authentication, principal);
+        //refresh token
+        String RFToken = tokenProvider.createRefreshToken(principal);
+        //refresh token save
+        userService.refreshSave(principal.getUser().getId() ,RFToken);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer "+jwt);
         Cookie cookie = new Cookie(JwtFilter.AUTHORIZATION_HEADER, jwt);
         cookie.setPath("/");
-        cookie.setMaxAge(5*(1000*60));
+        cookie.setMaxAge(10*(1000*60));
 
         res.addCookie(cookie);
 
