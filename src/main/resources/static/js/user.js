@@ -231,7 +231,8 @@ let index = {
             contentType: false
         }).done(function (data) {
             $("#result-profile-image").attr("src", data);
-            $("#image-uri").val(data);
+            $("#image-uri").val(data),
+            $("#image-uri-auth").val(data);
         }).fail(function (error) {
             alert(JSON.stringify(error));
         })
