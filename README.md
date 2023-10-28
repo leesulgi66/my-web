@@ -1,6 +1,7 @@
 # My-web
 ## 개인 프로젝트
-### Spring Boot, MriaDB, Gradle, Spring Data JPA, Spring Security, OAuth2, ajax
+### Spring Boot, MariaDB, Gradle, Spring Data JPA, Spring Security, OAuth2, thymeleaf, ajax,
+
 <br>
 
 - 스프링부트의 기본 개념과 원리를 적용
