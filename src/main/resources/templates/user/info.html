@@ -30,24 +30,28 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" th:if="${#strings.contains(#authentication.principal.username, '_social_')}">
+                        <label for="username">social</label> <input th:with="temp=${#authentication.principal.nickname}" th:value="${temp}" type="text" class="form-control readonly" readonly>
+                    </div>
+
+                    <div class="form-group" th:if="${!#strings.contains(#authentication.principal.username, '_social_')}">
                         <label for="username">username</label> <input th:value="${#authentication.principal.username}" type="text" class="form-control readonly" id="username" readonly>
                     </div>
 
                     <div class="form-group">
-                        <label for="username">nickname</label> <input th:value="${#authentication.principal.nickname}" type="text" class="form-control" placeholder="닉네임을 입력하세요" id="nickname">
+                        <label for="nickname">nickname</label> <input th:value="${#authentication.principal.nickname}" type="text" class="form-control" placeholder="닉네임을 입력하세요" id="nickname">
                     </div>
 
                     <div class="form-group">
-                        <label for="username">password</label> <input type="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password">
+                        <label for="password">password</label> <input type="password" class="form-control" placeholder="비밀번호를 입력하세요" id="password">
                     </div>
 
                     <div class="form-group">
-                        <label for="username">password</label> <input type="password" class="form-control" placeholder="비밀번호를 확인해 주세요" id="password-re">
+                        <label for="password">password</label> <input type="password" class="form-control" placeholder="비밀번호를 확인해 주세요" id="password-re">
                     </div>
 
                     <div class="form-group">
-                        <label for="username">email</label> <input th:value="${#authentication.principal.email}" type="email" class="form-control" placeholder="이메일을 입력하세요" id="email-update">
+                        <label for="email-update">email</label> <input th:value="${#authentication.principal.email}" type="email" class="form-control" placeholder="이메일을 입력하세요" id="email-update">
                     </div>
 
                 </form>
