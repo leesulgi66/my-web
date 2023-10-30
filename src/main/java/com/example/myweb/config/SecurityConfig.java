@@ -1,10 +1,12 @@
 package com.example.myweb.config;
 
 import com.example.myweb.config.auth.PrincipalDetailsService;
+import com.example.myweb.config.auth.PrincipalOauth2UserService;
 import com.example.myweb.config.jwt.JwtAccessDeniedHandler;
 import com.example.myweb.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.myweb.config.jwt.JwtSecurityConfig;
 import com.example.myweb.config.jwt.TokenProvider;
+import com.example.myweb.config.oauth.OAuth2SuccessHandler;
 import com.example.myweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +30,10 @@ public class SecurityConfig {
     private CorsConfig corsConfig;
     @Autowired
     private UserService userService;
+    @Autowired
+    private PrincipalOauth2UserService principalOauth2UserService;
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
     @Autowired
     private TokenProvider tokenProvider;
     @Autowired
@@ -58,15 +64,16 @@ public class SecurityConfig {
                 .permitAll()
 //                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
                 .and()
-                .formLogin().disable();
+                .formLogin().disable()
 //                .loginPage("/auth/loginForm") // login page
 //                .loginProcessingUrl("/auth/login")  // login 요청주소
 //                .defaultSuccessUrl("/") // login 성공시 이동주소
 //                .and()
-//                .oauth2Login()
-//                .loginPage("/auth/loginForm")
-//                .userInfoEndpoint()
-//                .userService(principalOauth2UserService);
+                .oauth2Login()
+                .loginPage("/auth/loginForm")
+                .successHandler(oAuth2SuccessHandler)
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService);
         return http.build();
     }
 
