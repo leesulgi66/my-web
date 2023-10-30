@@ -61,7 +61,7 @@ public class UserService {
     public User OauthUserSave(OAuth2UserInfo oAuth2User) {
         String provider = oAuth2User.getProvider();
         String providerId = oAuth2User.getProviderId();
-        String username = "social_"+provider+"_"+providerId;
+        String username = "_social_"+provider+"_"+providerId;
         String nickname = oAuth2User.getNickname();
         String password = passwordEncoder.encode(provider+providerId);
         String providerEmail = oAuth2User.getEmail();
