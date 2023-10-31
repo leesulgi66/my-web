@@ -1,6 +1,6 @@
-package com.example.myweb.config;
+package com.example.myweb.chat;
 
-import com.example.myweb.handler.WebSocketHandler;
+import com.example.myweb.chat.WebSocketHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
