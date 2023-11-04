@@ -1,4 +1,4 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.websocket;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.socket.CloseStatus;

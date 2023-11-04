@@ -1,4 +1,4 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.websocket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

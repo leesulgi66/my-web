@@ -1,4 +1,4 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.websocket;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
