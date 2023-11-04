@@ -38,8 +38,16 @@ public class WebSocketHandler extends TextWebSocketHandler {
 
     // 양방향 데이터 통신
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        super.handleTextMessage(session, message);
+    protected void handleTextMessage(WebSocketSession session, TextMessage textMessage) throws Exception {
+
+        Message message = Utils.getObject(textMessage.getPayload());
+        message.setSender(session.getId());
+
+        WebSocketSession receiver = sessions.get(message.getReceiver()); // 1.메시지를 받을 대상
+
+        if(receiver != null && receiver.isOpen()) { // 2.타겟이 존재하고, 연결된 상태라면 메시지 전송
+            receiver.sendMessage(new TextMessage(Utils.getString(message)));
+        }
     }
 
     // 소켓 연결 종료
