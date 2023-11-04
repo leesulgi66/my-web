@@ -53,7 +53,21 @@ public class WebSocketHandler extends TextWebSocketHandler {
     // 소켓 연결 종료
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        super.afterConnectionClosed(session, status);
+        var sessionId = session.getId();
+
+        sessions.remove(sessionId); // 1. 세션 저장소에서 연결이 끊긴 사용자를 삭제한다.
+
+        final Message message = new Message();
+        message.closeConnect();
+        message.setSender(sessionId);
+
+        sessions.values().forEach(s -> { // 2. 다른 사용자들에게, 접속이 끊겼다고 알려준다.
+            try {
+                s.sendMessage(new TextMessage(Utils.getString(message)));
+            }catch (Exception e) {
+
+            }
+        });
     }
 
     // 소켓 통신 에러
