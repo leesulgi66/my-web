@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .authorizeRequests()
 //                .antMatchers("/","/auth/**", "/js/**", "/css/**", "/images/**", "/**/*.css")
 //                .permitAll()
-                .antMatchers("/board/**")
+                .antMatchers("/board/**", "/chat/**")
                 .authenticated()
                 .antMatchers("/test/**")
                 .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
