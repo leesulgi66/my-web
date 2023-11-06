@@ -28,8 +28,8 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestParam String name) {
-        return chatRoomRepository.createChatRoom(name);
+    public ChatRoom createRoom(@RequestBody ChatRoomDto name) {
+        return chatRoomRepository.createChatRoom(name.getName());
     }
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
