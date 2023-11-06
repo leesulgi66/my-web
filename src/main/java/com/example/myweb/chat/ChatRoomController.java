@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -28,8 +29,9 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestBody ChatRoomDto name) {
-        return chatRoomRepository.createChatRoom(name.getName());
+    public ChatRoom createRoom(@RequestBody Map<String, String> roomName) {
+        System.out.println(roomName.get("name"));
+        return chatRoomRepository.createChatRoom(roomName.get("name"));
     }
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
