@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <title>My-web</title>
+    <style>
+        .input-group {
+            display:flex;
+        }
+
+        #btn-create-room {
+            margin : 0;
+            padding : 2px;
+        }
+    </style>
+</head>
+<body>
+    <div th:insert="~{/layout/header :: header}"></div>
+    <div class="content">
+        <div class="wrapper clearfix">
+           <div>
+               <h2>채팅방 리스트</h2>
+               <div class="input-group">
+                   <div class="input-group-prepend">
+                       <label class="input-group-text">방제목</label>
+                   </div>
+                   <input type="text" class="form-control" id="room_name">
+                   <div class="input-group-append">
+                       <a class="content-button" id="btn-create-room">채팅방 생성</a>
+                   </div>
+               </div>
+           </div>
+        </div>
+    </div>
+    <script src="/js/room.js"></script>
+    <div th:insert="~{/layout/footer :: footer}"></div>
+</body>
+</html>
