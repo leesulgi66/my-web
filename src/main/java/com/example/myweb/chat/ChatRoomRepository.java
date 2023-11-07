@@ -27,9 +27,10 @@ public class ChatRoomRepository {
     }
 
     // service
-    public ChatRoom createChatRoom(String name) {
+    public ChatRoom createChatRoom(String name, String creator) {
         ChatRoom chatRoom = ChatRoom.create(name);
         chatRoomMap.put(chatRoom.getRoomId(), chatRoom);
+        chatRoom.setCreator(creator);
         return chatRoom;
     }
 }
