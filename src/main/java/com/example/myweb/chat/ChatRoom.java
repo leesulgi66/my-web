@@ -10,6 +10,7 @@ import java.util.UUID;
 public class ChatRoom {
     private String roomId;
     private String name;
+    private String creator;
 
     public static ChatRoom create(String name) {
         ChatRoom chatRoom = new ChatRoom();
