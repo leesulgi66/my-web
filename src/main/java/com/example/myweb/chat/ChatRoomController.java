@@ -1,6 +1,9 @@
 package com.example.myweb.chat;
 
+import com.example.myweb.config.auth.PrincipalDetails;
+import com.example.myweb.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,8 @@ public class ChatRoomController {
     // 채팅 리스트 화면
     @GetMapping("/room")
     public String rooms(Model model) {
+        List<ChatRoom> rooms = chatRoomRepository.findAllRoom();
+        model.addAttribute("rooms", rooms);
         return "/chat/room";
     }
     // 모든 채팅방 목록 반환
@@ -29,9 +34,8 @@ public class ChatRoomController {
     // 채팅방 생성
     @PostMapping("/room")
     @ResponseBody
-    public ChatRoom createRoom(@RequestBody Map<String, String> roomName) {
-        System.out.println(roomName.get("name"));
-        return chatRoomRepository.createChatRoom(roomName.get("name"));
+    public ChatRoom createRoom(@RequestBody Map<String, String> roomName, @AuthenticationPrincipal User user) {
+        return chatRoomRepository.createChatRoom(roomName.get("name"), user.getNickname());
     }
     // 채팅방 입장 화면
     @GetMapping("/room/enter/{roomId}")
