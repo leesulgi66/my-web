@@ -33,6 +33,7 @@ let index = {
             }
         }).done(function(resp){
             console.log("done : "+ JSON.stringify(resp));
+            location.reload();
         }).fail(function(error){
             console.log("error : "+error);
         });
