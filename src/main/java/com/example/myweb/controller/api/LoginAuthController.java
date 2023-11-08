@@ -53,7 +53,7 @@ public class LoginAuthController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer "+jwt);
         Cookie cookie = new Cookie(JwtFilter.AUTHORIZATION_HEADER, jwt);
         cookie.setPath("/");
-        cookie.setMaxAge(864);
+        cookie.setMaxAge(1600);
 
         res.addCookie(cookie);
 

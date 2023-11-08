@@ -1,6 +1,5 @@
 package com.example.myweb.config.jwt;
 
-import com.example.myweb.config.auth.PrincipalDetails;
 import com.example.myweb.model.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -55,39 +54,39 @@ public class JwtFilter extends OncePerRequestFilter {
 
                             Cookie cookie = new Cookie(JwtFilter.AUTHORIZATION_HEADER, reJwt);
                             cookie.setPath("/");
-                            cookie.setMaxAge(10*(1000*60));
+                            cookie.setMaxAge(1600);
 
                             response.addCookie(cookie);
                         }
                     } else {
-                        log.info("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+                        log.info("cookie에 유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
                     }
                 }
             }
         }
-
         //-------------------------------------------------------------------------------------------------
 
-        if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt) == TokenProvider.JwtCode.ACCESS) {
-            Authentication authentication = tokenProvider.getAuthentication(jwt);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            log.info("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
-        }else if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt) == TokenProvider.JwtCode.EXPIRED){
-            log.info("만료된 토큰으로 로그인");
-            String refreshToken = tokenProvider.getRefresh(jwt);
-            log.info("리프레시 토큰 확인 : "+refreshToken);
-            if(tokenProvider.validateToken(refreshToken) == TokenProvider.JwtCode.ACCESS) {
-                log.info("리프레쉬 토큰 사용 가능 - 새로운 토큰 발급");
-                Authentication authentication = tokenProvider.getAuthentication(refreshToken);
-                User principal = (User) authentication.getPrincipal();
-                String reJwt = tokenProvider.createToken(principal);
+        if(jwt != null) {
+            if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt) == TokenProvider.JwtCode.ACCESS) {
+                Authentication authentication = tokenProvider.getAuthentication(jwt);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.info("header : Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+            }else if(StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt) == TokenProvider.JwtCode.EXPIRED){
+                log.info("만료된 토큰으로 로그인");
+                String refreshToken = tokenProvider.getRefresh(jwt);
+                log.info("리프레시 토큰 확인 : "+refreshToken);
+                if(tokenProvider.validateToken(refreshToken) == TokenProvider.JwtCode.ACCESS) {
+                    log.info("리프레쉬 토큰 사용 가능 - 새로운 토큰 발급");
+                    Authentication authentication = tokenProvider.getAuthentication(refreshToken);
+                    User principal = (User) authentication.getPrincipal();
+                    String reJwt = tokenProvider.createToken(principal);
 
-                response.addHeader(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + reJwt);
+                    response.addHeader(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + reJwt);
+                }
+            }else {
+                log.info("header에 유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
             }
-        } else {
-            log.info("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
         }
-
         filterChain.doFilter(request, response);
     }
 
