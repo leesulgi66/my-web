@@ -8,32 +8,31 @@
     <!-- jQuery Library -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <title>My-web</title>
-    <style>
-        .input-group {
-            display:flex;
-        }
 
-        #btn-create-room {
-            margin : 0;
-            padding : 2px;
-        }
-    </style>
 </head>
 <body>
     <div th:insert="~{/layout/header :: header}"></div>
     <div class="content">
         <div class="wrapper clearfix">
            <div>
-               <h2>채팅방 리스트</h2>
+               <h2 class="chat-title">채팅방 리스트</h2>
                <div class="input-group">
                    <div class="input-group-prepend">
-                       <label class="input-group-text">방제목</label>
+                       <label class="input-group-text title-h1">방제목</label>
                    </div>
                    <input type="text" class="form-control" id="room_name">
                    <div class="input-group-append">
                        <a class="content-button" id="btn-create-room">채팅방 생성</a>
                    </div>
                </div>
+
+               <div class="wrapper clearfix" th:each="room : ${rooms}">
+                   <div class="boards-title">
+                       <a class="title-h1" th:utext="${room.name}" th:href="@{/chat/room/enter/{id}(id = ${room.roomId})}"></a>
+                       <span class="board-username" th:utext="${room.creator}">작성자</span>
+                   </div>
+               </div>
+
            </div>
         </div>
     </div>
