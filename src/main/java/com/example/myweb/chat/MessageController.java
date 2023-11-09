@@ -21,6 +21,6 @@ public class MessageController {
         if(Message.MessageType.ENTER.equals(message.getType())){
             message.setMessage(message.getSender()+"님이 입장했습니다.");
         }
-        simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getChannelId(), message);
+        simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
     }
 }
