@@ -13,6 +13,6 @@ public class Message {
     }
     private MessageType type;
     private String sender;
-    private String channelId;
+    private String roomId;
     private String message;
 }
