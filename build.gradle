@@ -1,0 +1,62 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	//thymeleaf
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	// Thymeleaf 에서 springsecurity 의존성 설정
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	//maria DB
+	implementation("org.mariadb.jdbc:mariadb-java-client:2.1.2")
+	//spring security
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	//spring-security-taglibs
+	implementation group: 'org.springframework.security', name: 'spring-security-taglibs', version: '4.0.4.RELEASE'
+	//aws s3
+	//implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.5.RELEASE'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.5.RELEASE'
+	// oauth2-client 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	// https://mvnrepository.com/artifact/com.auth0/java-jwt
+	implementation group: 'com.auth0', name: 'java-jwt', version: '4.4.0'
+	// jjwt
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
+	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
+	//websocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	//STOMP
+	implementation 'org.webjars:stomp-websocket:2.3.3-1'
+	implementation 'org.webjars:sockjs-client:1.1.2'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
