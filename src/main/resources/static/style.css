@@ -363,6 +363,21 @@ input:focus {
     margin: .4em;
 }
 
+.input-group {
+    display:flex;
+}
+
+#btn-create-room,
+#btn-send-chat{
+    margin : 0;
+    padding : 2px;
+}
+
+.alert.alert-secondary{
+    background-color : white;
+    border-radius : .3em;
+}
+
 .footer {
     position: relative;
     transform: translate(0, 60%);
