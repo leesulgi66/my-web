@@ -10,5 +10,6 @@
 - Jwt 로그인을 통한 Stateless서버 이해
 - OAuth2 라이브러리를 이용한 소셜 로그인(google, naver, kakao)
 - S3를 이용한 이미지 업로드(회원 프로필 이미지)
+- websocket stomp를 이용한 채팅 구현
 - html/css/JavaScript
 <br>
