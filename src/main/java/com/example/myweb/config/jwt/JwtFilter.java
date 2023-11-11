@@ -54,7 +54,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
                             Cookie cookie = new Cookie(JwtFilter.AUTHORIZATION_HEADER, reJwt);
                             cookie.setPath("/");
-                            cookie.setMaxAge(1600);
+                            cookie.setMaxAge(3600);
 
                             response.addCookie(cookie);
                         }
