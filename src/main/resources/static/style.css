@@ -373,9 +373,16 @@ input:focus {
     padding : 2px;
 }
 
-.alert.alert-secondary{
+.alert-secondary{
     background-color : white;
     border-radius : .3em;
+}
+
+#msgArea {
+    border : .1em solid;
+    margin : .2em;
+    height : 15em;
+    overflow : auto;
 }
 
 .footer {
