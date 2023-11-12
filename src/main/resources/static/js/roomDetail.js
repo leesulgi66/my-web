@@ -19,21 +19,22 @@ let index = {
                 var str = '';
 
                 if(writer === username){
-                   str = "<div class='input-group'>";
-                   str += "<div class='alert alert-secondary'>";
+                   str = "<div class='input-group-text'>";
+                   str += "<div class='alert-secondary'>";
                    str += "<b>" + writer + " : " + content.message + "</b>";
                    str += "</div></div>";
                    $("#msgArea").append(str);
                }
                else{
-                   str = "<div class='input-group'>";
-                   str += "<div class='alert alert-warning'>";
+                   str = "<div class='input-group-text'>";
+                   str += "<div class='alert-warning'>";
                    str += "<b>" + writer + " : " + content.message + "</b>";
                    str += "</div></div>";
                    $("#msgArea").append(str);
                }
 
-                console.log(content);
+               let objDiv = document.getElementById("msgArea");
+               objDiv.scrollTop = objDiv.scrollHeight;
             });
             stomp.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:roomId, sender:username}));
         }, function(error) {
@@ -42,11 +43,10 @@ let index = {
 
         $("#btn-send-chat").on("click", function(e){
             var msg = document.getElementById("chat-message");
-            if(msg == "") {
+            if(msg.value == "") {
                 return false;
             }
 
-            console.log(username + ":" + msg.value);
             stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username}));
             msg.value = '';
         });
@@ -54,11 +54,10 @@ let index = {
         $("#chat-message").on("keydown", (key)=>{
             if(key.keyCode==13) {
                 var msg = document.getElementById("chat-message");
-                if(msg == "") {
+                if(msg.value == "") {
                     return false;
                 }
 
-                console.log(username + ":" + msg.value);
                 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username}));
                 msg.value = '';
             }
