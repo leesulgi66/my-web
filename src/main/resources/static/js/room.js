@@ -3,6 +3,12 @@ let index = {
         $("#btn-create-room").on("click", ()=>{  // 화살표 함수 -> JavaScript 함수의 this 바인딩
             this.createRoom();
         });
+
+        $("#room_name").on("keydown", (key)=>{
+            if(key.keyCode==13) {
+                this.createRoom();
+            }
+        });
     },
 
     createRoom: function() {
