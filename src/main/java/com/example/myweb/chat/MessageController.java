@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     private final SimpMessageSendingOperations simpMessageSendingOperations;
+    private final MessageService messageService;
 
     /*
         /sub/channel/12345      - 구독(channelId:12345)
@@ -21,6 +22,7 @@ public class MessageController {
         if(Message.MessageType.ENTER.equals(message.getType())){
             message.setMessage(message.getSender()+"님이 입장했습니다.");
         }
+        messageService.saveMessage(message);
         simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
     }
 }
