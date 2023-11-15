@@ -31,6 +31,7 @@ public class ChatRoomController {
         ChatRoom chatRoom = chatRoomService.findRoomById(roomId);
         model.addAttribute("roomName", chatRoom.getRoomName());
         model.addAttribute("roomId", roomId);
+        model.addAttribute("chatRoom", chatRoom);
         return "/chat/roomdetail";
     }
 
