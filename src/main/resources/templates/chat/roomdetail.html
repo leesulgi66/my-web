@@ -20,7 +20,14 @@
                <h2 class="chat-title" id="chat-room-name" th:utext="${roomName}">채팅방 리스트</h2>
                <input type="hidden" id="chat-room-id" th:value="${roomId}">
                <div class="input-group-text">
-                   <div id="msgArea" class="col"></div>
+                   <div id="msgArea" class="col">
+                       <div th:if="${message.sender} == ${#authentication.principal.nickname}" th:each="message:${chatRoom.messages}" class="alert-secondary">
+                           <p th:utext="${message.message}"></p>
+                       </div>
+                       <div th:if="${message.sender} != ${#authentication.principal.nickname}" th:each="message:${chatRoom.messages}" class="alert-warning">
+                           <p th:utext="${message.message}"></p>
+                       </div>
+                   </div>
                </div>
                <div class="input-group">
                    <div class="input-group-prepend">
