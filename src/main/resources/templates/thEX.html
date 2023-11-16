@@ -46,6 +46,7 @@
     <p th:unless="${true}" th:text="${hello}">
         unless 입니다
     </p>
+    <div th:if="${board.user.id} == ${#authentication.principal.id}"></div>
     <br>
 
     <!--반복문이 필요한 경우에 사용한다.-->
