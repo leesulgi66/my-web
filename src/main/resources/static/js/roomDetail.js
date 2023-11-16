@@ -3,7 +3,6 @@ let index = {
         let roomId = $("#chat-room-id").val();
         let roomName = $("#chat-room-name").text();
         let username = $("#chat-sender").text();
-        console.log(roomId+","+roomName+","+username);
 
         var sockJs = new SockJS("/ws");
         //1. SockJS를 내부에 들고있는 stomp를 내어줌
@@ -11,7 +10,6 @@ let index = {
 
         // STOMP 구독
         stomp.connect({}, function(frame) {
-            console.log("connected: " + frame);
             stomp.subscribe("/sub/channel/"+roomId, function(message) {
                 var content = JSON.parse(message.body);
 
@@ -21,14 +19,14 @@ let index = {
                 if(writer === username){
                    str = "<div class='input-group-text'>";
                    str += "<div class='alert-secondary'>";
-                   str += "<b>" + writer + " : " + content.message + "</b>";
+                   str += "<p>" + writer + " : " + content.message + "</p>";
                    str += "</div></div>";
                    $("#msgArea").append(str);
                }
                else{
                    str = "<div class='input-group-text'>";
                    str += "<div class='alert-warning'>";
-                   str += "<b>" + writer + " : " + content.message + "</b>";
+                   str += "<p>" + writer + " : " + content.message + "</p>";
                    str += "</div></div>";
                    $("#msgArea").append(str);
                }
