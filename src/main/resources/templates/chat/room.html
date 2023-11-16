@@ -28,7 +28,7 @@
 
                <div class="wrapper clearfix" th:each="room : ${rooms}">
                    <div class="boards-title">
-                       <a class="title-h1" th:utext="${room.name}" th:href="@{/chat/room/enter/{id}(id = ${room.roomId})}"></a>
+                       <a class="title-h1" th:utext="${room.roomName}" th:href="@{/chat/room/enter/{id}(id = ${room.roomId})}"></a>
                        <span class="board-username" th:utext="${room.creator}">작성자</span>
                    </div>
                </div>
