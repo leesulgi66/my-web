@@ -30,24 +30,7 @@ public class Message {
     @CreationTimestamp
     private Timestamp createDate;
 
-    @ManyToOne
-    @JoinColumn(name = "chatRoomId")
-    private ChatRoom chatRoom;
-
     public enum MessageType {
         ENTER, TALK
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", type=" + type +
-                ", sender='" + sender + '\'' +
-                ", roomId='" + roomId + '\'' +
-                ", message='" + message + '\'' +
-                ", createDate=" + createDate +
-                ", chatRoom=" + chatRoom +
-                '}';
     }
 }
