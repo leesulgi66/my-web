@@ -12,6 +12,7 @@ import java.util.UUID;
 public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
+    private final RoomAndMessageRepository roomAndMEssageRepository;
 
 
     public List<ChatRoom> findAllRoom() {
@@ -25,6 +26,12 @@ public class ChatRoomService {
         return chatRoomRepository.findByRoomId(id).orElseThrow(()->{
             throw new RuntimeException("찾는 채팅방이 없습니다.");
         });
+    }
+
+    public List<RoomAndMessage> findAllMessages(Long roomId) {
+        List<RoomAndMessage> messages = roomAndMEssageRepository.findAllByChatRoom(roomId);
+        System.out.println(messages);
+        return messages;
     }
 
     // service
