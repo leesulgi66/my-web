@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MessageService {
     private final MessageRepository messageRepository;
     private final ChatRoomRepository chatRoomRepository;
+    private final RoomAndMessageRepository roomAndMEssageRepository;
 
     @Transactional
     public void saveMessage (Message message) {
@@ -16,7 +17,9 @@ public class MessageService {
             throw new IllegalArgumentException("찾는 채팅 방이 없습니다.");
         });
 
-        message.setChatRoom(chatRoom);
+        RoomAndMessage roomAndMessage = new RoomAndMessage(chatRoom, message);
+
+        roomAndMEssageRepository.save(roomAndMessage);
         messageRepository.save(message);
     }
 }
