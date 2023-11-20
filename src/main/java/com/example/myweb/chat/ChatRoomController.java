@@ -29,10 +29,11 @@ public class ChatRoomController {
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(Model model, @PathVariable String roomId) {
         ChatRoom chatRoom = chatRoomService.findRoomById(roomId);
-        List<RoomAndMessage> messages = chatRoomService.findAllMessages(chatRoom.getId());
+        List<Message> messages = chatRoomService.findAllMessages(chatRoom);
         model.addAttribute("roomName", chatRoom.getRoomName());
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatRoom", chatRoom);
+        model.addAttribute("messages", messages);
         return "/chat/roomdetail";
     }
 
