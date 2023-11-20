@@ -3,6 +3,7 @@ package com.example.myweb.chat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -28,10 +29,13 @@ public class ChatRoomService {
         });
     }
 
-    public List<RoomAndMessage> findAllMessages(Long roomId) {
-        List<RoomAndMessage> messages = roomAndMEssageRepository.findAllByChatRoom(roomId);
-        System.out.println(messages);
-        return messages;
+    public List<Message> findAllMessages(ChatRoom chatRoom) {
+        List<RoomAndMessage> messages = roomAndMEssageRepository.findAllByChatRoom(chatRoom);
+        List<Message> messageList = new ArrayList<>();
+        for(RoomAndMessage message : messages) {
+            messageList.add(message.getMessage());
+        }
+        return messageList;
     }
 
     // service
