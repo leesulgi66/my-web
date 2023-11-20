@@ -21,10 +21,10 @@
                <input type="hidden" id="chat-room-id" th:value="${roomId}">
                <div class="input-group-text">
                    <div id="msgArea" class="col">
-                       <div th:if="${message.sender} == ${#authentication.principal.nickname}" th:each="message:${chatRoom.messages}" class="alert-secondary">
+                       <div th:if="${message.sender} == ${#authentication.principal.nickname}" th:each="message:${messages}" class="alert-secondary">
                            <p th:utext="${message.message}"></p>
                        </div>
-                       <div th:if="${message.sender} != ${#authentication.principal.nickname}" th:each="message:${chatRoom.messages}" class="alert-warning">
+                       <div th:if="${message.sender} != ${#authentication.principal.nickname}" th:each="message:${messages}" class="alert-warning">
                            <p th:utext="${message.message}"></p>
                        </div>
                    </div>
