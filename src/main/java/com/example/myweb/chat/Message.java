@@ -29,11 +29,6 @@ public class Message {
 
     private String message;
 
-    @OneToMany(mappedBy = "message" ,cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"message"}) // 무한참조 방지
-    @OrderBy("id desc")
-    private List<RoomAndMessage> messages;
-
     @CreationTimestamp
     private Timestamp createDate;
 

@@ -26,11 +26,6 @@ public class ChatRoom {
 
     private String creator;
 
-    @OneToMany(mappedBy = "chatRoom" ,cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties({"chatRoom"}) // 무한참조 방지
-    @OrderBy("id desc")
-    private List<RoomAndMessage> rooms;
-
     @CreationTimestamp
     private Timestamp createDate;
 }
