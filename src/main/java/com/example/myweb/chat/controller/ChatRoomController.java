@@ -1,5 +1,8 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.controller;
 
+import com.example.myweb.chat.medel.ChatRoom;
+import com.example.myweb.chat.service.ChatRoomService;
+import com.example.myweb.chat.medel.Message;
 import com.example.myweb.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

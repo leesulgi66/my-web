@@ -1,4 +1,4 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.medel;
 
 import com.example.myweb.model.Reply;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

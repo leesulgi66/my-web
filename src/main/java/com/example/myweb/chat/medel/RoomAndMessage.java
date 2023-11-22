@@ -1,4 +1,4 @@
-package com.example.myweb.chat;
+package com.example.myweb.chat.medel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
