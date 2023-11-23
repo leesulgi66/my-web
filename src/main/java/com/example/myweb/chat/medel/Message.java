@@ -33,6 +33,6 @@ public class Message {
     private Timestamp createDate;
 
     public enum MessageType {
-        ENTER, TALK
+        ENTER, TALK, QUIT
     }
 }
