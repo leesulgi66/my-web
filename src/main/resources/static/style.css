@@ -385,6 +385,22 @@ input:focus {
     overflow : auto;
 }
 
+.input-group {
+    margin-bottom : 0.1em;
+}
+
+#chat-room-name {
+    margin-left : .4em;
+}
+
+#btn-room-out {
+    margin: 0;
+    margin-top: 0.1em;
+    margin-right: 0.4em;
+    float: right;
+    padding: 0.3em;
+}
+
 .footer {
     position: relative;
     transform: translate(0, 60%);
