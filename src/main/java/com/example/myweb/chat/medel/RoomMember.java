@@ -24,4 +24,9 @@ public class RoomMember {
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
+
+    public RoomMember(ChatRoom chatRoom, User newMember) {
+        this.chatRoom = chatRoom;
+        this.user = newMember;
+    }
 }
