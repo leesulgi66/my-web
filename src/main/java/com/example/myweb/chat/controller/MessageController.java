@@ -23,8 +23,14 @@ public class MessageController {
     public void message(Message message) {
         if(Message.MessageType.ENTER.equals(message.getType())){
             message.setMessage(message.getSender()+"님이 입장했습니다.");
+            if(messageService.saveMember(message)){
+                messageService.saveMessage(message);
+                simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
+            }
+        }else {
+            messageService.saveMessage(message);
+            simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
         }
-        messageService.saveMessage(message);
-        simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
+
     }
 }
