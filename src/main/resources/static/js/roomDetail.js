@@ -1,5 +1,8 @@
 let index = {
     init: function() {
+        let objDiv = document.getElementById("msgArea");
+        objDiv.scrollTop = objDiv.scrollHeight;
+
         let roomId = $("#chat-room-id").val();
         let roomName = $("#chat-room-name").text();
         let username = $("#chat-sender").text();
