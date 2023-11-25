@@ -30,6 +30,7 @@
                    <div class="boards-title">
                        <a class="title-h1" th:utext="${room.roomName}" th:href="@{/chat/room/enter/{id}(id = ${room.roomId})}"></a>
                        <span class="board-username" th:utext="${room.creator}">작성자</span>
+                       </span><span>명 채팅중</span><span th:utext="${room.members.size()}">
                    </div>
                </div>
 
