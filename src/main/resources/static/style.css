@@ -393,7 +393,8 @@ input:focus {
     margin-left : .4em;
 }
 
-#btn-room-out {
+#btn-room-out,
+#btn-room-del{
     margin: 0;
     margin-top: 0.1em;
     margin-right: 0.4em;
