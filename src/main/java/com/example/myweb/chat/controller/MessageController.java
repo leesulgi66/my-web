@@ -27,6 +27,11 @@ public class MessageController {
                 messageService.saveMessage(message);
                 simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
             }
+        }else if(Message.MessageType.QUIT.equals(message.getType())){
+            message.setMessage(message.getSender()+"님이 퇴장했습니다.");
+            messageService.saveMessage(message);
+            simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
+
         }else {
             messageService.saveMessage(message);
             simpMessageSendingOperations.convertAndSend("/sub/channel/" + message.getRoomId(), message);
