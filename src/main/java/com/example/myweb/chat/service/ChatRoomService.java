@@ -3,8 +3,11 @@ package com.example.myweb.chat.service;
 import com.example.myweb.chat.medel.ChatRoom;
 import com.example.myweb.chat.medel.Message;
 import com.example.myweb.chat.medel.RoomAndMessage;
+import com.example.myweb.chat.medel.RoomMember;
 import com.example.myweb.chat.repository.ChatRoomRepository;
 import com.example.myweb.chat.repository.RoomAndMessageRepository;
+import com.example.myweb.chat.repository.RoomMemberRepository;
+import com.example.myweb.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,7 @@ public class ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
     private final RoomAndMessageRepository roomAndMEssageRepository;
+    private final RoomMemberRepository roomMemberRepository;
 
 
     public List<ChatRoom> findAllRoom() {
@@ -52,5 +56,14 @@ public class ChatRoomService {
                         .build();
         chatRoomRepository.save(chatRoom);
         return chatRoom;
+    }
+
+    public void outRoom(String roomId, User user) {
+        ChatRoom outRoom = chatRoomRepository.findByRoomId(roomId).orElseThrow(()->{
+            throw new IllegalArgumentException("찾는 채팅 방이 존재하지 않습니다.");
+        });
+
+        RoomMember roomAndMember = roomMemberRepository.findByChatRoomAndUser(outRoom, user);
+        roomMemberRepository.delete(roomAndMember);
     }
 }
