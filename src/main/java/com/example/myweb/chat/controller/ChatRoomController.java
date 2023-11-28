@@ -59,4 +59,11 @@ public class ChatRoomController {
     public ChatRoom roomInfo(@PathVariable String roomId) {
         return chatRoomService.findRoomById(roomId);
     }
+
+    @DeleteMapping("/room/out")
+    @ResponseBody
+    public void roomOut(@RequestBody Map<String, String> roomId, @AuthenticationPrincipal User user) {
+        String outRoomId = roomId.get("roomId");
+        chatRoomService.outRoom(outRoomId, user);
+    }
 }
