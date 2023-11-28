@@ -64,7 +64,46 @@ let index = {
             }
         });
 
+        $("#btn-room-out").on("click", ()=>{
+            stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "QUIT", sender: username}));
+            stomp.disconnect("/sub/channel/"+roomId);
+            this.outRoom();
+        });
+
     },
+
+    outRoom : function() {
+        let data = {
+            roomId : $("#chat-room-id").val(),
+        }
+        console.log(data);
+        if (!confirm("정말 채팅방을 나갈까요?")) {
+            return false;
+        } else {
+            $.ajax({
+                type:"DELETE",
+                url: "/chat/room/out",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                        console.log("success : ")
+                        console.log(JSON.stringify(data))
+                    },
+                error: function (request, status, error) {
+                    console.log("code: " + request.status)
+                    console.log("message: " + request.responseText)
+                    console.log("error: " + error);
+                    location.href="/chat/room";
+                }
+            }).done(function(resp){
+                console.log("done : "+ JSON.stringify(resp));
+                location.reload();
+            }).fail(function(error){
+                console.log("error : "+error);
+            });
+        }
+    }
 }
 
 index.init();
