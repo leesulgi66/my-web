@@ -10,6 +10,7 @@ import com.example.myweb.chat.repository.RoomMemberRepository;
 import com.example.myweb.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,6 +59,7 @@ public class ChatRoomService {
         return chatRoom;
     }
 
+    @Transactional
     public void outRoom(String roomId, User user) {
         ChatRoom outRoom = chatRoomRepository.findByRoomId(roomId).orElseThrow(()->{
             throw new IllegalArgumentException("찾는 채팅 방이 존재하지 않습니다.");
@@ -65,5 +67,16 @@ public class ChatRoomService {
 
         RoomMember roomAndMember = roomMemberRepository.findByChatRoomAndUser(outRoom, user);
         roomMemberRepository.delete(roomAndMember);
+    }
+
+    @Transactional
+    public void deleteRoom(String roomId, User user) {
+        ChatRoom delRoom = chatRoomRepository.findByRoomId(roomId).orElseThrow(()->{
+            throw new IllegalArgumentException("찾는 채팅 방이 존재하지 않습니다.");
+        });
+
+        roomMemberRepository.deleteAllByChatRoomAndUser(delRoom, user);
+        roomAndMEssageRepository.deleteAllByChatRoom(delRoom);
+        chatRoomRepository.deleteById(delRoom.getId());
     }
 }
