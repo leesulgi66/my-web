@@ -75,8 +75,10 @@ public class ChatRoomService {
             throw new IllegalArgumentException("찾는 채팅 방이 존재하지 않습니다.");
         });
 
-        roomMemberRepository.deleteAllByChatRoomAndUser(delRoom, user);
-        roomAndMEssageRepository.deleteAllByChatRoom(delRoom);
-        chatRoomRepository.deleteById(delRoom.getId());
+        if(delRoom.getCreator().equals(user.getNickname())) {
+            roomMemberRepository.deleteAllByChatRoom(delRoom);
+            roomAndMEssageRepository.deleteAllByChatRoom(delRoom);
+            chatRoomRepository.deleteById(delRoom.getId());
+        }
     }
 }
