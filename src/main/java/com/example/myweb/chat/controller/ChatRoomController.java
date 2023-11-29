@@ -3,8 +3,10 @@ package com.example.myweb.chat.controller;
 import com.example.myweb.chat.medel.ChatRoom;
 import com.example.myweb.chat.service.ChatRoomService;
 import com.example.myweb.chat.medel.Message;
+import com.example.myweb.dto.ResponseDto;
 import com.example.myweb.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +64,17 @@ public class ChatRoomController {
 
     @DeleteMapping("/room/out")
     @ResponseBody
-    public void roomOut(@RequestBody Map<String, String> roomId, @AuthenticationPrincipal User user) {
+    public ResponseDto roomOut(@RequestBody Map<String, String> roomId, @AuthenticationPrincipal User user) {
         String outRoomId = roomId.get("roomId");
         chatRoomService.outRoom(outRoomId, user);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @DeleteMapping("/room/delete")
+    @ResponseBody
+    public ResponseDto roomDelete(@RequestBody Map<String, String> roomId, @AuthenticationPrincipal User user) {
+        String delRoomId = roomId.get("roomId");
+        chatRoomService.deleteRoom(delRoomId, user);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
 }
