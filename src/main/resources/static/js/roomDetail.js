@@ -71,19 +71,16 @@ let index = {
                 stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "QUIT", sender: username}));
                 stomp.disconnect("/sub/channel/"+roomId);
                 this.outRoom();
-                location.href="/chat/room";
             }
         });
 
         $("#btn-room-del").on("click", ()=>{
-            if (!confirm("정말 채팅방을 나갈까요?")) {
+            if (!confirm("정말 채팅방을 삭제 할까요?")) {
                 return false;
             }else {
                 stomp.disconnect("/sub/channel/"+roomId);
                 this.deleteRoom();
-                location.href="/chat/room";
             }
-
         });
 
     },
@@ -110,7 +107,8 @@ let index = {
             }
         }).done(function(resp){
             console.log("done : "+ JSON.stringify(resp));
-            location.reload();
+            alert("채팅방을 나갑니다.");
+            location.href="/chat/room";
         }).fail(function(error){
             console.log("error : "+error);
         });
@@ -138,7 +136,8 @@ let index = {
             }
         }).done(function(resp){
             console.log("done : "+ JSON.stringify(resp));
-            location.reload();
+            alert("채팅방을 삭제합니다.");
+            location.href="/chat/room";
         }).fail(function(error){
             console.log("error : "+error);
         });
