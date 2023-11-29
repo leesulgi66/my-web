@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RoomAndMessageRepository extends JpaRepository <RoomAndMessage, Long> {
     List<RoomAndMessage> findAllByChatRoom(ChatRoom chatRoom);
+    void deleteAllByChatRoom(ChatRoom chatRoom);
 }
