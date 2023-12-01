@@ -81,4 +81,13 @@ public class ChatRoomService {
             chatRoomRepository.deleteById(delRoom.getId());
         }
     }
+
+    @Transactional
+    public void deleteRoom(User user) {
+        List<RoomMember> delRooms = roomMemberRepository.findAllByUser(user);
+
+        for(RoomMember delRoom : delRooms) {
+            deleteRoom(delRoom.getChatRoom().getRoomId(), user);
+        }
+    }
 }
