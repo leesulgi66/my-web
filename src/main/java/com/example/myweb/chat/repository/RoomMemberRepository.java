@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface RoomMemberRepository extends JpaRepository<RoomMember, Long> {
     List<RoomMember> findAllByChatRoom(ChatRoom chatRoom);
+    List<RoomMember> findAllByUser(User user);
     RoomMember findByChatRoomAndUser(ChatRoom chatRoom, User user);
     void deleteAllByChatRoom(ChatRoom chatRoom);
     void deleteAllByUser(User user);
