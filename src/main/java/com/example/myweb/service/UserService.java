@@ -1,5 +1,7 @@
 package com.example.myweb.service;
 
+import com.example.myweb.chat.repository.RoomMemberRepository;
+import com.example.myweb.chat.service.ChatRoomService;
 import com.example.myweb.config.oauth.OAuth2UserInfo;
 import com.example.myweb.model.User;
 import com.example.myweb.repository.BoardRepository;
@@ -25,6 +27,10 @@ public class UserService {
     private BoardRepository boardRepository;
     @Autowired
     private ReplyRepository replyRepository;
+    @Autowired
+    private ChatRoomService chatRoomService;
+    @Autowired
+    private RoomMemberRepository roomMemberRepository;
     @Autowired
     private ReplyToCommentRepository replyToCommentRepository;
     @Autowired
@@ -116,6 +122,8 @@ public class UserService {
             throw new IllegalArgumentException("인증 실패");
         }
 
+        chatRoomService.deleteRoom(delUser);
+        roomMemberRepository.deleteAllByUser(delUser);
         replyToCommentRepository.deleteAllByUserId(delUser.getId());
         replyRepository.deleteAllByUserId(delUser.getId());
         boardRepository.deleteAllByUserId(delUser.getId());
