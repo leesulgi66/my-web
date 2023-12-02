@@ -53,7 +53,7 @@ public class ChatRoomController {
     @PostMapping("/room")
     @ResponseBody
     public ChatRoom createRoom(@RequestBody Map<String, String> roomName, @AuthenticationPrincipal User user) {
-        return chatRoomService.createChatRoom(roomName.get("name"), user.getNickname());
+        return chatRoomService.createChatRoom(roomName.get("name"), user);
     }
     // 특정 채팅방 조회
     @GetMapping("/room/{roomId}")
