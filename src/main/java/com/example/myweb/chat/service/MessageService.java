@@ -45,16 +45,18 @@ public class MessageService {
             throw new IllegalArgumentException("찾는 채팅 방이 없습니다.");
         });
         List<RoomMember> members = roomMemberRepository.findAllByChatRoom(chatRoom);
-        List<String> memberList = new ArrayList<>();
+        List<Long> memberList = new ArrayList<>();
         for(RoomMember member : members) {
-            memberList.add(member.getUser().getNickname());
+            memberList.add(member.getUser().getId());
         }
         if(Message.MessageType.ENTER.equals(message.getType())) {
-            String sender = message.getSender();
-            if(memberList.contains(sender)) {
+            long senderId = message.getSenderId();
+            if(memberList.contains(senderId)) {
                 return false;
             }else {
-                User newMember = userRepository.findByNickname(sender);
+                User newMember = userRepository.findById(senderId).orElseThrow(()->{
+                    throw new IllegalArgumentException("해당 유저가 없습니다.");
+                });
                 RoomMember addMember = new RoomMember(chatRoom, newMember);
                 roomMemberRepository.save(addMember);
                 return true;
