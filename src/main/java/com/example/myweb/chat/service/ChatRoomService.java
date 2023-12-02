@@ -49,13 +49,16 @@ public class ChatRoomService {
     }
 
     // service
-    public ChatRoom createChatRoom(String name, String creator) {
+    @Transactional
+    public ChatRoom createChatRoom(String name, User user) {
         ChatRoom chatRoom = ChatRoom.builder()
                         .roomId(UUID.randomUUID().toString())
-                        .creator(creator)
+                        .creator(user.getNickname())
                         .roomName(name)
                         .build();
         chatRoomRepository.save(chatRoom);
+        RoomMember member = new RoomMember(chatRoom, user);
+        roomMemberRepository.save(member);
         return chatRoom;
     }
 
