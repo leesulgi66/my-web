@@ -228,12 +228,14 @@ body{
 
 #result-profile-image {
     width: 5em;
+    height: 5em;
     border-radius: 50%;
 }
 
 #menu-profile-image,
 #menu-profile-image-null {
     width: 4em;
+    height: 4em;
     border-radius: 50%;
     position:relative; 
     top:50%; 
