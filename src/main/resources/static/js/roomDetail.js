@@ -6,6 +6,7 @@ let index = {
         let roomId = $("#chat-room-id").val();
         let roomName = $("#chat-room-name").text();
         let username = $("#chat-sender").text();
+        let userid = $("#chat-sender-id").val();
 
         var sockJs = new SockJS("/ws");
         //1. SockJS를 내부에 들고있는 stomp를 내어줌
@@ -37,7 +38,7 @@ let index = {
                let objDiv = document.getElementById("msgArea");
                objDiv.scrollTop = objDiv.scrollHeight;
             });
-            stomp.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:roomId, sender:username}));
+            stomp.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:roomId, sender:username, senderId:userid}));
         }, function(error) {
             alert("error "+error);
         });
@@ -48,7 +49,7 @@ let index = {
                 return false;
             }
 
-            stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username}));
+            stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username, senderId:userid}));
             msg.value = '';
         });
 
@@ -59,7 +60,7 @@ let index = {
                     return false;
                 }
 
-                stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username}));
+                stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "TALK", message: msg.value, sender: username, senderId:userid}));
                 msg.value = '';
             }
         });
@@ -68,7 +69,7 @@ let index = {
             if (!confirm("정말 채팅방을 나갈까요?")) {
                 return false;
             }else {
-                stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "QUIT", sender: username}));
+                stomp.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: "QUIT", sender: username, senderId:userid}));
                 stomp.disconnect("/sub/channel/"+roomId);
                 this.outRoom();
             }
