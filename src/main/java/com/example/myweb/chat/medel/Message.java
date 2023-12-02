@@ -25,6 +25,8 @@ public class Message {
 
     private String sender;
 
+    private long senderId;
+
     private String roomId;
 
     private String message;
