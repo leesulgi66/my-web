@@ -65,6 +65,8 @@ public class BoardService {
         expireDay.set(Calendar.HOUR_OF_DAY, 0); // 0시
         expireDay.set(Calendar.MINUTE, 0); // 0분
         expireDay.set(Calendar.SECOND, 0); // 0초
+        long cookieTime = (expireDay.getTimeInMillis() - System.currentTimeMillis()) / 1000;
+        System.out.println(cookieTime);
         long count = board.getCount();
         Cookie oldCookie = null;
         Cookie[] cookies = request.getCookies();
@@ -82,7 +84,7 @@ public class BoardService {
                 oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
                 oldCookie.setPath("/");
                 oldCookie.setHttpOnly(true);
-                oldCookie.setMaxAge(((int) (expireDay.getTimeInMillis() - System.currentTimeMillis())) / 1000); // 쿠키 만료시간 12시 정각
+                oldCookie.setMaxAge((int) cookieTime); // 쿠키 만료시간 12시 정각
                 response.addCookie(oldCookie);
             }
         } else {
@@ -90,7 +92,7 @@ public class BoardService {
             Cookie newCookie = new Cookie("postView", "[" + id + "]");
             newCookie.setPath("/");
             newCookie.setHttpOnly(true);
-            newCookie.setMaxAge(((int) (expireDay.getTimeInMillis() - System.currentTimeMillis())) / 1000);
+            newCookie.setMaxAge(((int) cookieTime));
             response.addCookie(newCookie);
         }
         return board;
