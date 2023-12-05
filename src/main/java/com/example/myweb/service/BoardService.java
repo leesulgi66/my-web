@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Calendar;
 
 @Slf4j
 @Service
@@ -59,6 +60,11 @@ public class BoardService {
         });
 
         /* 조회수 로직 */
+        Calendar expireDay = Calendar.getInstance(); // 만료시간
+        expireDay.add(Calendar.DAY_OF_MONTH, 1); // 다음날
+        expireDay.set(Calendar.HOUR_OF_DAY, 0); // 0시
+        expireDay.set(Calendar.MINUTE, 0); // 0분
+        expireDay.set(Calendar.SECOND, 0); // 0초
         long count = board.getCount();
         Cookie oldCookie = null;
         Cookie[] cookies = request.getCookies();
@@ -76,7 +82,7 @@ public class BoardService {
                 oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
                 oldCookie.setPath("/");
                 oldCookie.setHttpOnly(true);
-                oldCookie.setMaxAge(60 * 60 * 24); 							// 쿠키 시간
+                oldCookie.setMaxAge(((int) (expireDay.getTimeInMillis() - System.currentTimeMillis())) / 1000); // 쿠키 만료시간 12시 정각
                 response.addCookie(oldCookie);
             }
         } else {
@@ -84,7 +90,7 @@ public class BoardService {
             Cookie newCookie = new Cookie("postView", "[" + id + "]");
             newCookie.setPath("/");
             newCookie.setHttpOnly(true);
-            newCookie.setMaxAge(60 * 60 * 24); 								// 쿠키 시간
+            newCookie.setMaxAge(((int) (expireDay.getTimeInMillis() - System.currentTimeMillis())) / 1000);
             response.addCookie(newCookie);
         }
         return board;
